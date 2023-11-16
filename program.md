@@ -7,7 +7,7 @@
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Presiding:__ Bishop Faga
-* __Conducting:__ Brother Lauti
+* __Conducting:__ Brother Mahe
 * __Organist:__ Sister Paongo
 * __Chorister:__ Brother Finau
 * __Opening Hymn:__ [#49 - Ofi Hoku ʻOtuá](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0490-nearer-my-god-to-thee-ton.pdf?download=true)
