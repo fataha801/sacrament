@@ -2,7 +2,7 @@
 ## Orem Utah 2nd Stake
 ### Lehi 41st Ward (Tongan) Sacrament Program - November 19, 2023
 
-> My dear brothers and sisters and friends visting us today, we welcome you to our ward sacrament program. We gather as a great ward family desiring to worship our Lord and Savior, Jesus Christ. Hope you will feel of the Spirit and the love of the Savior Jesus Christ. Thank you for joining with us.
+> To each of you in attendance this day, We welcome you to our Ward Sacrament program. We gather as a great Ward family desiring to worship our Lord and Savior, Jesus Christ. Our hope is for you to feel the love our Savior has for each of us. Thank you for joining with us and please ask someone next to you if you'd like to be directed to the next class. 
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
