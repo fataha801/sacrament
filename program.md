@@ -11,7 +11,7 @@
 * __Organist:__ Sister Paongo
 * __Chorister:__ Brother Finau
 * __Opening Hymn:__ [#49 - Ofi Hoku ʻOtuá](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0490-nearer-my-god-to-thee-ton.pdf?download=true)
-* __Invocation:__ TBD
+* __Invocation:__ Brother Chad Bowman
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -28,7 +28,7 @@
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Closing Hymn:__ [#41 - ʻE ʻOtua ko e Tupuʻanga](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0410-my-god-the-spring-of-all-my-joys-ton.pdf?download=true)
-* __Benediction:__ Brother Tupou
+* __Benediction:__ Sister Kiersten Militoni
 
 > "With all the Lord gives to us, He has asked us to return to Him and His kingdom on earth 10 percent of our increase. He has promised us that as we are honest in our tithes, He will “open … the windows of heaven, and pour … out a blessing, that there shall not be room enough to receive it.” He has promised us that He will protect us from evil. These promises are so certain, the Lord declares, “Prove me now herewith,” a phrase found nowhere else in the scriptures but when quoting Malachi. The windows of heaven open in many ways. Some are temporal, but many are spiritual. Some are subtle and easy to overlook. Trust in the Lord’s timing; the blessings always come.” - By Elder Neil L. Andersen
 
@@ -46,6 +46,7 @@
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 | Event | Dates/Time | Details  |
 |:------------- |:-------------|:-------------|
+| Tithing Declaration Appointments are still available, Please see Bro Moeai to schedule | Sundays and Thursdays | Fotu Moeai (650) 784-1404 |
 | Stake Temple Tuesdays | Endowments session @ 8:30pm | 1st Tue. (Tongan) & 2nd Tue. (Samoan) |
 | Utah Food Bank | Thursdays @ 7:00pm | Volunteers arrived at 6:45am - 1149 N 300 W, Lehi UT 84043  |
 | Ward Christmas Party | Dec. 8th Friday @ 6-9pm | Lehi 41st Ward Cultural Gym  |
