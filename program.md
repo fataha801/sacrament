@@ -1,46 +1,47 @@
 # The Church of Jesus Christ of Latter-day Saints
 ## Orem Utah 2nd Stake
-### Lehi 41st Ward (Tongan) Sacrament Program - November 19, 2023
+### Lehi 41st Ward (Tongan) Sacrament Program - November 26, 2023
 
 > To each of you in attendance this day, We welcome you to our Ward Sacrament program. We gather as a great Ward family desiring to worship our Lord and Savior, Jesus Christ. Our hope is for you to feel the love our Savior has for each of us. Thank you for joining with us and please ask someone next to you if you'd like to be directed to the next class. 
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-* __Presiding:__ Bishop Faga
-* __Conducting:__ Brother Mahe
-* __Organist:__ Sister Paongo
-* __Chorister:__ Brother Finau
-* __Opening Hymn:__ [#49 - Ofi Hoku ʻOtuá](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0490-nearer-my-god-to-thee-ton.pdf?download=true)
-* __Invocation:__ Brother Chad Bowman
+* __Presiding:__ Bishop Jason Faga
+* __Conducting:__ Brother Reno Mahe
+* __Organist:__ Sister Talila Paongo
+* __Chorister:__ Brother Kelepi Finau
+* __Opening Hymn:__ [#27 - Folofola Mai ʻa Sīsū](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0270-thus-sayeth-the-lord-ton.pdf?download=true)
+* __Invocation:__ Celestial Moeai 
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Ward and Stake Business__
-* __Sacrament Hymn:__ [#194 - There Is a Green Hill Far Away](https://media.ldscdn.org/pdf/music/hymns/2001-01-1940-there-is-a-green-hill-far-away-eng.pdf?download=true)
+* __Sacrament Hymn:__ [#193 - I Stand All Amazed](https://media.ldscdn.org/pdf/music/hymns/2001-01-1930-i-stand-all-amazed-eng.pdf?download=true)
 * __Administration of the Sacrament__
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-* __Speaker:__ Sister Vea
-* __Speaker:__ Sister Mahe
-* __Speaker:__ Sister Movete
+* __Speaker:__ Sister Tatiana Tupou
+* __Speaker:__ Sister Mya Balter
+* __Special Music:__ Semi Qoro, Jr Maile, and Tatyana Mara 
+* __Speaker:__ Sister Tatyana Mara 
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-* __Closing Hymn:__ [#41 - ʻE ʻOtua ko e Tupuʻanga](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0410-my-god-the-spring-of-all-my-joys-ton.pdf?download=true)
-* __Benediction:__ Sister Kiersten Militoni
+* __Closing Hymn:__ [#249 - Called to Serve](https://media.ldscdn.org/pdf/music/hymns/2001-01-2490-called-to-serve-eng.pdf?download=true)
+* __Benediction:__ Brother Kaden Nahinu
 
-> "With all the Lord gives to us, He has asked us to return to Him and His kingdom on earth 10 percent of our increase. He has promised us that as we are honest in our tithes, He will “open … the windows of heaven, and pour … out a blessing, that there shall not be room enough to receive it.” He has promised us that He will protect us from evil. These promises are so certain, the Lord declares, “Prove me now herewith,” a phrase found nowhere else in the scriptures but when quoting Malachi. The windows of heaven open in many ways. Some are temporal, but many are spiritual. Some are subtle and easy to overlook. Trust in the Lord’s timing; the blessings always come.” - By Elder Neil L. Andersen
-
+> "As members of The Church of Jesus Christ of Latter-day Saints, we have the blessing and privilege to stand as witnesses of the Lord and His name everywhere we are. As we strive to live our lives in harmony with the gospel of Jesus Christ, our conduct will be a living testimony of our Redeemer and His name. Moreover, we witness of Christ in word by sharing with others what we believe, feel, or know of Jesus Christ."
+> Elder Adilson de Paula Parrella
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 | Leadership | Member | Contact  |
 |:------------- |:-------------|:-------------|
-| Exe. Secr. | Brother Moea'i | 650-784-1404 |
-| Clerk | Brother Dutta | 801-833-3579  |
-| RS Pres. | Sister Movete | 650-676-9808 |
-| EQ Pres. | Brother Rehak | 831-917-4923 |
-| Building Coord. | Talamai's | 808-294-5398 |
+| Exe. Secr. | Brother Fotu Moea'i | 650-784-1404 |
+| Clerk | Brother Nathan Dutta | 801-833-3579  |
+| RS Pres. | Sister Taina Movete | 650-676-9808 |
+| EQ Pres. | Brother Trenton Rehak | 831-917-4923 |
+| Building Coord. | Esafe & Seini Talamai | 808-294-5398 |
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
