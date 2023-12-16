@@ -7,32 +7,36 @@
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Presiding:__ Bishop Jason Faga
-* __Conducting:__ Brother Reno Mahe
+* __Conducting:__ Brother Taukave Lauti
 * __Organist:__ Sister Talila Paongo
 * __Chorister:__ Brother Kelepi Finau
-* __Opening Hymn:__ [#27 - Folofola Mai ʻa Sīsū](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0270-thus-sayeth-the-lord-ton.pdf?download=true)
+* __Opening Hymn:__ [#134 - I Believe in Christ](https://media.ldscdn.org/pdf/music/hymns/2001-01-1340-i-believe-in-christ-eng.pdf?download=true)
 * __Invocation:__ Celestial Moeai 
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Ward and Stake Business__
-* __Sacrament Hymn:__ [#193 - I Stand All Amazed](https://media.ldscdn.org/pdf/music/hymns/2001-01-1930-i-stand-all-amazed-eng.pdf?download=true)
+* __Sacrament Hymn:__ [#94 - ʻE Tamai Taʻengata](https://media.ldscdn.org/pdf/music/hymns-tongan/1994-01-0940-o-god-the-eternal-father-ton.pdf?download=true)
 * __Administration of the Sacrament__
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-* __Speaker:__ Sister Tatiana Tupou
-* __Speaker:__ Sister Mya Balter
-* __Special Music:__ Semi Qoro, Jr Maile, and Tatyana Mara 
-* __Speaker:__ Sister Tatyana Mara 
+* __Speaker:__ Junior Movete
+* __Speaker:__ Sarynn Matheny
+* __Speaker:__ Connor Vea
+* __Congregation Hymn:__
+* __Speaker:__ Emily Bowman
+* __Speaker:__ Lleyton Enoch
+* __Speaker:__ Leila Paongo 
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Closing Hymn:__ [#249 - Called to Serve](https://media.ldscdn.org/pdf/music/hymns/2001-01-2490-called-to-serve-eng.pdf?download=true)
 * __Benediction:__ Brother Kaden Nahinu
 
-> "As members of The Church of Jesus Christ of Latter-day Saints, we have the blessing and privilege to stand as witnesses of the Lord and His name everywhere we are. As we strive to live our lives in harmony with the gospel of Jesus Christ, our conduct will be a living testimony of our Redeemer and His name. Moreover, we witness of Christ in word by sharing with others what we believe, feel, or know of Jesus Christ."
-> Elder Adilson de Paula Parrella
+> “Behold, I am a disciple of Jesus Christ, the Son of God. I have been called of him to declare his word among his people, that they might have everlasting life.”
+> 3 Nephi 5:13
+> Youth Theme 2024
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 | Leadership | Member | Contact  |
@@ -47,7 +51,8 @@
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 | Event | Dates/Time | Details  |
 |:------------- |:-------------|:-------------|
+| NEXT SUNDAY | December 24, 2023 | Sacrament ONLY | Please INVITE a Friend to Worship with our Ward on Christmas EVE |
 | Tithing Declaration Appointments are still available, Please see Bro Moeai to schedule | Sundays and Thursdays | Fotu Moeai (650) 784-1404 |
 | Stake Temple Tuesdays | Endowments session @ 8:30pm | 1st Tue. (Tongan) & 2nd Tue. (Samoan) |
 | Utah Food Bank | Thursdays @ 7:00pm | Volunteers arrived at 6:45am - 1149 N 300 W, Lehi UT 84043  |
-| Ward Christmas Party | Dec. 8th Friday @ 6-9pm | Lehi 41st Ward Cultural Gym  |
+
