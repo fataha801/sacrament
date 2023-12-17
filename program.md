@@ -24,7 +24,7 @@
 * __Speaker:__ Junior Movete
 * __Speaker:__ Sarynn Matheny
 * __Speaker:__ Connor Vea
-* __Congregation Hymn:__ [#254 - True to the Faith ] (https://media.ldscdn.org/pdf/music/hymns/2001-01-2540-true-to-the-faith-eng.pdf?download=true)
+* __Congregation Hymn:__ [#254 - True to the Faith ](https://media.ldscdn.org/pdf/music/hymns/2001-01-2540-true-to-the-faith-eng.pdf?download=true)
 * __Speaker:__ Emily Bowman
 * __Speaker:__ Lleyton Enoch
 * __Speaker:__ Leila Paongo 
