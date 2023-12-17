@@ -24,7 +24,7 @@
 * __Speaker:__ Junior Movete
 * __Speaker:__ Sarynn Matheny
 * __Speaker:__ Connor Vea
-* __Congregation Hymn:__
+* __Congregation Hymn:__ [#254 - True to the Faith ] (https://media.ldscdn.org/pdf/music/hymns/2001-01-2540-true-to-the-faith-eng.pdf?download=true)
 * __Speaker:__ Emily Bowman
 * __Speaker:__ Lleyton Enoch
 * __Speaker:__ Leila Paongo 
@@ -32,7 +32,7 @@
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 * __Closing Hymn:__ [#201 - Joy to the World ](https://media.ldscdn.org/pdf/music/hymns/2001-01-2010-joy-to-the-world-eng.pdf?download=true)
-* __Benediction:__ 
+* __Benediction:__ Ofa Lauti 
 
 > “Behold, I am a disciple of Jesus Christ, the Son of God. I have been called of him to declare his word among his people, that they might have everlasting life.”
 > 3 Nephi 5:13
