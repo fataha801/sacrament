@@ -11,7 +11,7 @@
 * __Organist:__ Sister Talila Paongo
 * __Chorister:__ Brother Kelepi Finau
 * __Opening Hymn:__ [#134 - I Believe in Christ](https://media.ldscdn.org/pdf/music/hymns/2001-01-1340-i-believe-in-christ-eng.pdf?download=true)
-* __Invocation:__  
+* __Invocation:__ Aisa Aumoeualogo
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
