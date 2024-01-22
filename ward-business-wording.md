@@ -1,5 +1,5 @@
 ### Confirmation of Newly Baptized Members
-Bishopric invites individual who was recently baptized to stand and be recognized.
+As we read your name, please stand and remain standing until all names have been read.
 
 Brothers and Sisters,
 FULL NAME OF INDIVIDUAL was baptized and confirmed the newest member of The Church of Jesus Christ of Latter-day Saints on DAY and MONTH. All those who can join the Bishopric in extending full fellowship may do so by the uplifted hand. Thank you.
