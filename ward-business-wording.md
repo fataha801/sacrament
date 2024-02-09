@@ -8,14 +8,14 @@ FULL NAME OF INDIVIDUAL was baptized and confirmed the newest member of The Chur
 We have received the membership records for the following members who have moved into our ward. 
 As we read your name, please stand and remain standing until all names have been read.
 
-+ New Members Full Name
++ `Valentine Tinoifili-Utuga`
 
 All those who can join with the bishopric in welcoming these new members may manifest it by the uplifted hand.
 
 ### Releases - Calling(s)
 The following individual(s) is released from their following calling, and we propose that `he/she/they` be given a vote of thanks for their service.
 
-+ Members Full Name as Name of Calling
++ Members Full Name as Name of Calling - `Celestial Moeai as RS Activities Coordinator`
 + Members Full Name as Name of Calling
 + Members Full Name as Name of Calling
 
@@ -24,9 +24,9 @@ Those who wish to express their appreciation may manifest it by the uplifted han
 ### Sustainings - Calling(s)
 The following individual(s) has been called to the following callings, and we propose that each of `he/she/they` be sustained. If they are here today to please stand and remain standing till their names is called.
 
-+ Members Full Name as Name of Calling
-+ Members Full Name as Name of Calling
-+ Members Full Name as Name of Calling
++ `Jarom Brown` as `Ward Technology Specialist`
++ Only in Teachers and Deacons quorum - `Connor Vea` as `Priest Secretary`; `Admon Moungaloa` as `Teachers Quorum 2nd Counselor`
++ Only if Sister accepts calling - `Celestial Moea`i as `RS Teacher`
   
 Those in favor may manifest it by the uplifted hand. [Pause briefly for the sustaining vote.]
 Those opposed, if any, may manifest it. [Pause briefly to allow for a dissenting vote, if any.]
