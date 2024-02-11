@@ -32,7 +32,9 @@ The following individual(s) has been called to the following callings, and we pr
   + `Connor Vea` as `Priest Secretary`;
   + `Admon Moungaloa` as `Teachers Quorum 2nd Counselor`;
   + `Ezius Aumoeualogo` as `Deacons Quorum 1st Counselor`;
-  + `Tonga Teancum Mahe` as `Deacons Quorum 2nd Counselor`; 
+  + `Tonga Teancum Mahe` as `Deacons Quorum 2nd Counselor`;
+  + Release: `Mosa'ati Tupou` as `Deacons Quorum 1st Counselor`;
+  + Release: `Atlas Militoni` as `Deacons Quorum 2nd Counselor`; 
 + Only if Sister accepts calling -
   + `Celestial Moea`i as `RS Teacher`
   
