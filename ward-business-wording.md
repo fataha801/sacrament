@@ -28,8 +28,13 @@ Those who wish to express their appreciation may manifest it by the uplifted han
 The following individual(s) has been called to the following callings, and we propose that each of `he/she/they` be sustained. If they are here today to please stand and remain standing till their names is called.
 
 + `Jarom Brown` as `Ward Technology Specialist`
-+ Only in Teachers and Deacons quorum - `Connor Vea` as `Priest Secretary`; `Admon Moungaloa` as `Teachers Quorum 2nd Counselor`
-+ Only if Sister accepts calling - `Celestial Moea`i as `RS Teacher`
++ Only in Teachers and Deacons quorum -
+  + `Connor Vea` as `Priest Secretary`;
+  + `Admon Moungaloa` as `Teachers Quorum 2nd Counselor`;
+  + `Ezius Aumoeualogo` as `Deacons Quorum 1st Counselor`;
+  + `Tonga Teancum Mahe` as `Deacons Quorum 2nd Counselor`; 
++ Only if Sister accepts calling -
+  + `Celestial Moea`i as `RS Teacher`
   
 Those in favor may manifest it by the uplifted hand. [Pause briefly for the sustaining vote.]
 Those opposed, if any, may manifest it. [Pause briefly to allow for a dissenting vote, if any.]
