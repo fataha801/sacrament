@@ -11,6 +11,7 @@ As we read your name, please stand and remain standing until all names have been
 + `Valentine Tinoifili-Utuga`
 + `Jone Ramanu Mara`
 + `Tanya Rae Mara`
++ `Zedekiah Ezekiel Ray Hunkin-Mara`
 
 All those who can join with the bishopric in welcoming these new members may manifest it by the uplifted hand.
 
