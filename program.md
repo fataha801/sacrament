@@ -20,11 +20,11 @@
 
 
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-* __Speaker:__ 
-* __Speaker:__  
-* __Speaker:__  
+* __Speaker:__Vaoahi Prescott 
+* __Speaker:__Uinise Prescott  
+* __Speaker:__Janelle Prescott  
 * __Congregation Hymn:__ [#254 - True to the Faith ](https://media.ldscdn.org/pdf/music/hymns/2001-01-2540-true-to-the-faith-eng.pdf?download=true)
-* __Speaker:__  
+* __Speaker:__Alipate Prescott  
 * __Speaker:__  
 * __Speaker:__ 
 
