@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sacrament Meeting — Lehi 41st Ward (Tongan)</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+[data-theme="light"] {
+  --bg:        #edeae4;
+  --bg-card:   #ffffff;
+  --bg-2:      #e4e1da;
+  --text:      #18180f;
+  --text-2:    #56554e;
+  --text-3:    #9a9890;
+  --border:    rgba(0,0,0,0.12);
+  --border-2:  rgba(0,0,0,0.20);
+  --teal:      #0c6e52;
+  --teal-bg:   #ddf3ea;
+  --toggle-track: #ccc9c0;
+  --toggle-knob:  #ffffff;
+}
+[data-theme="dark"] {
+  --bg:        #18180f;
+  --bg-card:   #222219;
+  --bg-2:      #2a2a20;
+  --text:      #f0efe8;
+  --text-2:    #a8a79e;
+  --text-3:    #686860;
+  --border:    rgba(255,255,255,0.09);
+  --border-2:  rgba(255,255,255,0.16);
+  --teal:      #3fcca0;
+  --teal-bg:   #063d2e;
+  --toggle-track: #3fcca0;
+  --toggle-knob:  #18180f;
+}
+
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.6; transition: background .2s, color .2s; }
+
+/* NAV */
+.nav { background: var(--bg-card); border-bottom: 1px solid var(--border-2); padding: 0 20px; height: 50px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+.nav-brand { display: flex; align-items: center; gap: 9px; }
+.nav-logo { width: 28px; height: 28px; background: var(--teal); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: white; flex-shrink: 0; }
+.nav-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-admin { font-size: 11px; color: var(--text-3); text-decoration: none; }
+.nav-admin:hover { color: var(--teal); }
+
+/* THEME TOGGLE */
+.theme-toggle { cursor: pointer; position: relative; }
+.theme-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+.tog-track { width: 38px; height: 20px; border-radius: 999px; background: var(--toggle-track); display: flex; align-items: center; padding: 2px; transition: background .2s; }
+.tog-knob { width: 16px; height: 16px; border-radius: 50%; background: var(--toggle-knob); transition: transform .2s; font-size: 9px; display: flex; align-items: center; justify-content: center; }
+[data-theme="dark"] .tog-knob { transform: translateX(18px); }
+
+/* CONTAINER */
+.container { max-width: 540px; margin: 0 auto; padding: 28px 16px 64px; }
+
+/* HEADER CARD */
+.header-card { background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 16px; text-align: center; padding: 28px 20px 22px; margin-bottom: 12px; }
+.eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); font-weight: 500; margin-bottom: 8px; }
+.prog-title { font-size: 30px; font-weight: 500; color: var(--text); letter-spacing: -.5px; margin-bottom: 5px; }
+.church-name { font-size: 12px; color: var(--text-2); font-weight: 500; margin-bottom: 10px; }
+.hdr-rule { width: 32px; height: 1px; background: var(--border-2); margin: 10px auto; }
+.ward-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+.prog-date { font-size: 13px; color: var(--text-2); margin-bottom: 2px; }
+.prog-time { font-size: 12px; color: var(--text-3); margin-bottom: 8px; }
+.prog-address { font-size: 11px; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 3px; }
+.prog-address svg { width: 11px; height: 11px; }
+
+/* BLOCKS */
+.block { background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+.block-label { padding: 8px 16px; background: var(--bg-2); border-bottom: 1px solid var(--border-2); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--text-3); font-weight: 500; }
+.prog-row { display: flex; align-items: baseline; padding: 10px 16px; border-bottom: 1px solid var(--border); gap: 12px; }
+.prog-row:last-child { border-bottom: none; }
+.row-lbl { font-size: 11px; color: var(--text-3); min-width: 88px; flex-shrink: 0; }
+.row-val { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
+.row-val.empty { color: var(--text-3); font-weight: 400; font-style: italic; }
+.hymn-num { font-size: 11px; color: var(--text-3); font-weight: 500; }
+.hymn-sep { color: var(--text-3); margin: 0 4px; font-size: 11px; }
+.hymn-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.hymn-link { font-size: 11px; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 3px; margin-top: 4px; }
+.hymn-link:hover { text-decoration: underline; }
+.hymn-link svg { width: 11px; height: 11px; }
+.speaker-row { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+.speaker-row:last-child { border-bottom: none; }
+.speaker-av { width: 34px; height: 34px; border-radius: 50%; background: var(--teal-bg); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+.speaker-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.speaker-topic { font-size: 11px; color: var(--text-2); margin-top: 1px; }
+.div-section { display: flex; align-items: center; gap: 10px; margin: 16px 0 10px; }
+.div-section::before, .div-section::after { content:''; flex:1; height:1px; background: var(--border-2); }
+.div-label { font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.notes-text { padding: 10px 16px; font-size: 12px; color: var(--text-2); line-height: 1.6; }
+
+/* STATES */
+.loading { text-align: center; padding: 60px 20px; color: var(--text-3); font-size: 13px; }
+.loading-dot { display: inline-block; animation: pulse 1.2s ease-in-out infinite; }
+.loading-dot:nth-child(2) { animation-delay: .2s; }
+.loading-dot:nth-child(3) { animation-delay: .4s; }
+@keyframes pulse { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+.no-program { text-align: center; padding: 56px 20px; background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 16px; }
+.no-program svg { width: 34px; height: 34px; margin: 0 auto 12px; display: block; color: var(--text-3); opacity: .35; }
+.no-program h2 { font-size: 15px; font-weight: 500; color: var(--text-2); margin-bottom: 5px; }
+.no-program p { font-size: 12px; color: var(--text-3); }
+.pub-footer { text-align: center; margin-top: 28px; font-size: 11px; color: var(--text-3); line-height: 1.8; }
+.pub-footer a { color: var(--teal); text-decoration: none; }
+
+@media (max-width: 480px) { .prog-title { font-size: 24px; } .container { padding: 16px 12px 48px; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">41</div>
+    <span class="nav-title">Lehi 41st Ward (Tongan)</span>
+  </div>
+  <div class="nav-right">
+    <label class="theme-toggle" title="Toggle theme">
+      <input type="checkbox" id="tog" onchange="toggleTheme(this.checked)">
+      <div class="tog-track"><div class="tog-knob" id="tog-icon">☀️</div></div>
+    </label>
+    <a class="nav-admin" href="/admin/">Ward admin</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="loading" id="loading">
+    <span class="loading-dot">●</span>
+    <span class="loading-dot">●</span>
+    <span class="loading-dot">●</span>
+    <div style="margin-top:10px;">Loading program…</div>
+  </div>
+  <div id="content" style="display:none;"></div>
+</div>
+
+<script>
+/* ── CONFIG — replace these three values ── */
+const SUPABASE_URL  = 'YOUR_SUPABASE_URL';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpcnNzemF2b2V2dHBjcWVzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNzU2MzIsImV4cCI6MjA5Njc1MTYzMn0.4L5rgpzNSlqHS0tRMNljCjwxUZXvj4s5jEHNtRasCxI';
+/* ──────────────────────────────────────── */
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function initTheme() {
+  const saved = localStorage.getItem('sm_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+  applyTheme(saved === 'dark');
+}
+function applyTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  localStorage.setItem('sm_theme', dark ? 'dark' : 'light');
+  const tog = document.getElementById('tog');
+  const ico = document.getElementById('tog-icon');
+  if (tog) tog.checked = dark;
+  if (ico) ico.textContent = dark ? '🌙' : '☀️';
+}
+function toggleTheme(dark) { applyTheme(dark); }
+
+function ini(n) { return (n||'').split(' ').filter(Boolean).map(p=>p[0].toUpperCase()).slice(0,2).join(''); }
+
+function formatDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d + 'T00:00:00');
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const date = dt.getDate();
+  const suffix = (date===1||date===21||date===31)?'st':(date===2||date===22)?'nd':(date===3||date===23)?'rd':'th';
+  return `${days[dt.getDay()]} — ${months[dt.getMonth()]} ${date}${suffix}, ${dt.getFullYear()}`;
+}
+
+function hymnRow(hymn, label) {
+  if (!hymn?.num && !hymn?.title) return `<div class="prog-row"><span class="row-lbl">${label}</span><span class="row-val empty">—</span></div>`;
+  const numStr = hymn.num ? `<span class="hymn-num">#${hymn.num}</span><span class="hymn-sep">—</span>` : '';
+  const link = hymn.url ? `<br><a class="hymn-link" href="${hymn.url}" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Listen</a>` : '';
+  return `<div class="prog-row"><span class="row-lbl">${label}</span><div style="flex:1;">${numStr}<span class="hymn-title">${hymn.title||''}</span>${link}</div></div>`;
+}
+
+async function loadProgram() {
+  const today = new Date().toISOString().split('T')[0];
+
+  const { data, error } = await sb
+    .from('programs')
+    .select('*')
+    .eq('status', 'published')
+    .gte('date', today)
+    .order('date', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+
+  // If nothing upcoming, grab latest published past program
+  let prog = data;
+  if (!prog && !error) {
+    const { data: past } = await sb
+      .from('programs')
+      .select('*')
+      .eq('status', 'published')
+      .order('date', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    prog = past;
+  }
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = '';
+
+  if (error) {
+    document.getElementById('content').innerHTML = `<div class="no-program"><p style="color:#A32D2D;">Unable to load program. Please try again.</p></div>`;
+    return;
+  }
+
+  if (!prog) {
+    document.getElementById('content').innerHTML = `
+      <div class="no-program">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        <h2>No program available yet</h2>
+        <p>Check back closer to Sunday.</p>
+      </div>`;
+    return;
+  }
+
+  const h = prog.hymns || {};
+  const speakers = (prog.speakers || []).filter(s => s.name);
+
+  document.getElementById('content').innerHTML = `
+    <div class="header-card">
+      <div class="eyebrow">Sacrament Meeting</div>
+      <div class="prog-title">Sacrament</div>
+      <div class="church-name">The Church of Jesus Christ of Latter-day Saints</div>
+      <div class="hdr-rule"></div>
+      <div class="ward-name">Lehi Utah 3rd Stake — Lehi 41st Ward (Tongan)</div>
+      <div class="prog-date">${formatDate(prog.date)}</div>
+      <div class="prog-time">10:30 a.m. – 11:30 a.m.</div>
+      <a class="prog-address" href="https://maps.app.goo.gl/8w6JqnUFXgujLkpN9" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        680 N 350 W, American Fork, UT 84003
+      </a>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Leadership</div>
+      <div class="prog-row"><span class="row-lbl">Presiding</span><span class="row-val">${prog.presiding||'—'}</span></div>
+      <div class="prog-row"><span class="row-lbl">Conducting</span><span class="row-val">${prog.conducting||'—'}</span></div>
+      <div class="prog-row"><span class="row-lbl">Chorister</span><span class="row-val">${prog.chorister||'—'}</span></div>
+      <div class="prog-row"><span class="row-lbl">Pianist</span><span class="row-val">${prog.pianist||'—'}</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Opening</div>
+      ${hymnRow(h.opening, 'Opening hymn')}
+      <div class="prog-row"><span class="row-lbl">Invocation</span><span class="row-val">${prog.invocation||'—'}</span></div>
+    </div>
+
+    <div class="div-section"><span class="div-label">Ward &amp; Stake Business</span></div>
+
+    ${prog.notes ? `<div class="block"><div class="block-label">Announcements</div><div class="notes-text">${prog.notes}</div></div>` : ''}
+
+    <div class="block">
+      <div class="block-label">Sacrament</div>
+      ${hymnRow(h.sacrament, 'Sacrament hymn')}
+    </div>
+
+    <div class="div-section"><span class="div-label">Administration of the Sacrament</span></div>
+
+    ${speakers.length ? `
+    <div class="block">
+      <div class="block-label">Speakers</div>
+      ${speakers.map(s=>`
+        <div class="speaker-row">
+          <div class="speaker-av">${ini(s.name)}</div>
+          <div>
+            <div class="speaker-name">${s.name}</div>
+            ${s.topic && s.topic !== 'Assigned talk topic' ? `<div class="speaker-topic">${s.topic}</div>` : ''}
+          </div>
+        </div>`).join('')}
+    </div>` : ''}
+
+    ${h.rest?.num ? `
+    <div class="block">
+      <div class="block-label">Rest hymn</div>
+      ${hymnRow(h.rest, 'Rest hymn')}
+    </div>` : ''}
+
+    <div class="block">
+      <div class="block-label">Closing</div>
+      ${hymnRow(h.closing, 'Closing hymn')}
+      <div class="prog-row"><span class="row-lbl">Benediction</span><span class="row-val">${prog.benediction||'—'}</span></div>
+    </div>
+
+    <div class="pub-footer">
+      Lehi 41st Ward (Tongan) · The Church of Jesus Christ of Latter-day Saints<br>
+      <a href="/admin/">Ward admin sign in</a>
+    </div>
+  `;
+}
+
+initTheme();
+loadProgram();
+</script>
+</body>
+</html>
