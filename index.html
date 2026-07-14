@@ -185,7 +185,14 @@ const SUPABASE_URL = 'https://girsszavoevtpcqesivk.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpcnNzemF2b2V2dHBjcWVzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNzU2MzIsImV4cCI6MjA5Njc1MTYzMn0.4L5rgpzNSlqHS0tRMNljCjwxUZXvj4s5jEHNtRasCxI';
 /* ─────────────────────────────────────────────── */
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    storageKey: 'sb-lehi41-auth'
+  }
+});
 
 function initTheme() {
   const saved = localStorage.getItem('sm_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
