@@ -264,7 +264,12 @@ async function loadProgram() {
           <div class="speaker-av">${ini(s.name)}</div>
           <div>
             <div class="speaker-name">${s.name}</div>
-            ${s.topic && s.topic !== 'Assigned talk topic' ? `<div class="speaker-topic">${s.topic}</div>` : ''}
+            ${s.topic && s.topic !== 'Assigned talk topic' ? `
+              <div class="speaker-topic">
+                ${s.url
+                  ? `<a href="${s.url}" target="_blank" style="color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:3px;">${s.topic}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`
+                  : s.topic}
+              </div>` : ''}
           </div>
         </div>`).join('')}
     </div>` : ''}
