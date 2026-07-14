@@ -383,7 +383,7 @@ tr:hover td { background: var(--bg-2); }
         <div class="card" style="margin-bottom:14px;">
           <div class="card-hdr"><span class="card-title">Serving Missionaries</span></div>
           <div class="table-wrap"><table>
-            <thead><tr><th>Name</th><th>Mission</th><th style="width:110px">Hometown</th><th style="width:110px">Start date</th><th style="width:70px"></th></tr></thead>
+            <thead><tr><th>Photo</th><th>Name</th><th>Mission</th><th style="width:100px">Start</th><th style="width:100px">End</th><th style="width:70px"></th></tr></thead>
             <tbody id="miss-tbody"></tbody>
           </table></div>
         </div>
@@ -417,8 +417,18 @@ tr:hover td { background: var(--bg-2); }
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="field"><label>Full name</label><input type="text" id="miss-name" placeholder="Elder / Sister Full Name"/></div>
         <div class="field"><label>Mission</label><input type="text" id="miss-mission" placeholder="e.g. New Zealand Auckland Mission"/></div>
-        <div class="field"><label>Hometown</label><input type="text" id="miss-hometown" placeholder="e.g. Lehi, Utah"/></div>
-        <div class="field"><label>Start date</label><input type="date" id="miss-start"/></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="field"><label>Start (month &amp; year)</label><input type="month" id="miss-start"/></div>
+          <div class="field"><label>End (month &amp; year)</label><input type="month" id="miss-end"/></div>
+        </div>
+        <div class="field">
+          <label>Photo</label>
+          <div id="miss-photo-preview" style="margin-top:4px;margin-bottom:6px;display:none;">
+            <img id="miss-photo-img" src="" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid var(--border-2);display:block;"/>
+          </div>
+          <input type="file" id="miss-photo-file" accept="image/*" onchange="previewMissPhoto(this)" style="font-size:11px;"/>
+          <div style="font-size:10px;color:var(--text-3);margin-top:3px;">JPG or PNG, max 2MB. Photo will be cropped to a circle.</div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
@@ -943,6 +953,19 @@ document.querySelectorAll('.modal-backdrop').forEach(bd => bd.addEventListener('
 
 /* ── RESOURCES PAGE ── */
 let editingMissId = null;
+let editingMissPhotoUrl = null;
+
+function previewMissPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('miss-photo-img');
+    const prev = document.getElementById('miss-photo-preview');
+    img.src = e.target.result;
+    prev.style.display = '';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
 
 async function renderResources() {
   await Promise.all([renderMissionaries(), loadWardSettings()]);
@@ -956,10 +979,11 @@ async function renderMissionaries() {
     return;
   }
   tbody.innerHTML = data.map(m => `<tr>
+    <td style="width:44px;"><div style="width:34px;height:34px;border-radius:50%;overflow:hidden;background:var(--teal-bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--teal);">${m.photo_url ? `<img src="${m.photo_url}" style="width:100%;height:100%;object-fit:cover;" alt="">` : ini(m.name)}</div></td>
     <td style="font-weight:500;font-size:12px;">${m.name}</td>
     <td style="font-size:11px;color:var(--text-2);">${m.mission||'—'}</td>
-    <td style="font-size:11px;">${m.hometown||'—'}</td>
     <td style="font-size:11px;">${m.start_date ? new Date(m.start_date+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '—'}</td>
+    <td style="font-size:11px;">${m.end_date ? new Date(m.end_date+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'}) : 'Active'}</td>
     <td><button class="btn btn-sm" onclick="openEditMissionary('${m.id}')">Edit</button></td>
   </tr>`).join('');
 }
@@ -993,7 +1017,10 @@ async function saveWardSettings() {
 
 function openAddMissionary() {
   editingMissId = null;
-  ['miss-name','miss-mission','miss-hometown','miss-start'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  ['miss-name','miss-mission','miss-start','miss-end'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  const fp = document.getElementById('miss-photo-file'); if(fp) fp.value='';
+  const prev = document.getElementById('miss-photo-preview'); if(prev) prev.style.display='none';
+  editingMissPhotoUrl = null;
   document.getElementById('miss-modal-title').textContent = 'Add missionary';
   document.getElementById('miss-delete-btn').style.display = 'none';
   document.getElementById('miss-modal').classList.add('open');
@@ -1005,8 +1032,14 @@ async function openEditMissionary(id) {
   editingMissId = id;
   document.getElementById('miss-name').value = data.name || '';
   document.getElementById('miss-mission').value = data.mission || '';
-  document.getElementById('miss-hometown').value = data.hometown || '';
-  document.getElementById('miss-start').value = data.start_date || '';
+  document.getElementById('miss-start').value = data.start_date ? data.start_date.slice(0,7) : '';
+  document.getElementById('miss-end').value = data.end_date ? data.end_date.slice(0,7) : '';
+  const fp = document.getElementById('miss-photo-file'); if(fp) fp.value='';
+  editingMissPhotoUrl = data.photo_url || null;
+  const prev = document.getElementById('miss-photo-preview');
+  const img = document.getElementById('miss-photo-img');
+  if (data.photo_url) { img.src = data.photo_url; prev.style.display=''; }
+  else { prev.style.display='none'; }
   document.getElementById('miss-modal-title').textContent = 'Edit missionary';
   document.getElementById('miss-delete-btn').style.display = '';
   document.getElementById('miss-modal').classList.add('open');
@@ -1015,14 +1048,34 @@ async function openEditMissionary(id) {
 async function saveMissionary() {
   const name = document.getElementById('miss-name').value.trim();
   if (!name) { showToast('Name is required'); return; }
+  showSaving(true);
+
+  // Handle photo upload if a new file was selected
+  let photoUrl = editingMissPhotoUrl;
+  const fileInput = document.getElementById('miss-photo-file');
+  if (fileInput.files && fileInput.files[0]) {
+    const file = fileInput.files[0];
+    if (file.size > 2 * 1024 * 1024) { showToast('Photo must be under 2MB'); showSaving(false); return; }
+    const ext = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${name.replace(/\s+/g,'-').toLowerCase()}.${ext}`;
+    const { data: uploadData, error: uploadErr } = await sb.storage
+      .from('missionary-photos')
+      .upload(fileName, file, { upsert: true });
+    if (uploadErr) { showToast('Photo upload failed: ' + uploadErr.message); showSaving(false); return; }
+    const { data: urlData } = sb.storage.from('missionary-photos').getPublicUrl(fileName);
+    photoUrl = urlData.publicUrl;
+  }
+
+  const startVal = document.getElementById('miss-start').value;
+  const endVal = document.getElementById('miss-end').value;
   const payload = {
     name,
     mission:    document.getElementById('miss-mission').value.trim(),
-    hometown:   document.getElementById('miss-hometown').value.trim(),
-    start_date: document.getElementById('miss-start').value || null,
+    start_date: startVal ? startVal + '-01' : null,
+    end_date:   endVal   ? endVal   + '-01' : null,
+    photo_url:  photoUrl || null,
     updated_at: new Date().toISOString()
   };
-  showSaving(true);
   if (editingMissId) {
     await sb.from('missionaries').update(payload).eq('id', editingMissId);
   } else {
