@@ -293,6 +293,12 @@ tr:hover td { background: var(--bg-2); }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Repeat tracker
         </button>
       </div>
+      <div class="sb-sect">
+        <div class="sb-lbl">Ward</div>
+        <button class="sb-item" id="nav-resources" onclick="showPage('resources')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Missionaries &amp; Info
+        </button>
+      </div>
       <div class="sb-sect" id="admin-nav" style="display:none;">
         <div class="sb-lbl">Admin</div>
         <button class="sb-item" id="nav-users" onclick="showPage('users')">
@@ -364,6 +370,61 @@ tr:hover td { background: var(--bg-2); }
           <tbody id="users-tbody"></tbody>
         </table></div></div>
       </div>
+
+      <!-- MISSIONARIES & WARD INFO PAGE -->
+      <div class="page" id="page-resources">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
+          <div><div class="page-title">Missionaries &amp; Ward Info</div><div class="page-sub">Appears as expandable cards at the bottom of the public program</div></div>
+          <button class="btn btn-primary" onclick="openAddMissionary()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add missionary
+          </button>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-hdr"><span class="card-title">Serving Missionaries</span></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Name</th><th>Mission</th><th style="width:110px">Hometown</th><th style="width:110px">Start date</th><th style="width:70px"></th></tr></thead>
+            <tbody id="miss-tbody"></tbody>
+          </table></div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-hdr"><span class="card-title">Ward Info &amp; Links</span></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="field"><label>Bishop / Bishopric appointments contact</label><input type="text" id="ws-bishop" placeholder="Name and phone number"/></div>
+              <div class="field"><label>Chapel scheduling contact</label><input type="text" id="ws-chapel" placeholder="Name and phone number"/></div>
+              <div class="field"><label>Ward Calendar URL</label><input type="url" id="ws-calendar" placeholder="https://..."/></div>
+              <div class="field"><label>Chapel Cleaning URL</label><input type="url" id="ws-cleaning" placeholder="https://..."/></div>
+              <button class="btn btn-primary btn-sm" style="margin-top:6px;align-self:flex-start;" onclick="saveWardSettings()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Save settings
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ADD MISSIONARY MODAL -->
+<div class="modal-backdrop" id="miss-modal">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-hdr"><span class="modal-title" id="miss-modal-title">Add missionary</span><button class="modal-close" onclick="closeModal('miss-modal')">×</button></div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="field"><label>Full name</label><input type="text" id="miss-name" placeholder="Elder / Sister Full Name"/></div>
+        <div class="field"><label>Mission</label><input type="text" id="miss-mission" placeholder="e.g. New Zealand Auckland Mission"/></div>
+        <div class="field"><label>Hometown</label><input type="text" id="miss-hometown" placeholder="e.g. Lehi, Utah"/></div>
+        <div class="field"><label>Start date</label><input type="date" id="miss-start"/></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-sm" id="miss-delete-btn" onclick="deleteMissionary()" style="margin-right:auto;display:none;">Remove</button>
+      <button class="btn btn-sm" onclick="closeModal('miss-modal')">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="saveMissionary()">Save</button>
     </div>
   </div>
 </div>
@@ -586,6 +647,7 @@ function showPage(p) {
   if (p === 'programs') renderPrograms();
   if (p === 'history') renderHistory();
   if (p === 'users') renderUsers();
+  if (p === 'resources') renderResources();
 }
 
 function renderDashboard() {
@@ -878,6 +940,109 @@ function switchModalTab(id, btn) {
 }
 
 document.querySelectorAll('.modal-backdrop').forEach(bd => bd.addEventListener('click', e => { if(e.target===bd) bd.classList.remove('open'); }));
+
+/* ── RESOURCES PAGE ── */
+let editingMissId = null;
+
+async function renderResources() {
+  await Promise.all([renderMissionaries(), loadWardSettings()]);
+}
+
+async function renderMissionaries() {
+  const { data } = await sb.from('missionaries').select('*').order('sort_order').order('start_date');
+  const tbody = document.getElementById('miss-tbody');
+  if (!data?.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-3);padding:24px;">No missionaries added yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(m => `<tr>
+    <td style="font-weight:500;font-size:12px;">${m.name}</td>
+    <td style="font-size:11px;color:var(--text-2);">${m.mission||'—'}</td>
+    <td style="font-size:11px;">${m.hometown||'—'}</td>
+    <td style="font-size:11px;">${m.start_date ? new Date(m.start_date+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '—'}</td>
+    <td><button class="btn btn-sm" onclick="openEditMissionary('${m.id}')">Edit</button></td>
+  </tr>`).join('');
+}
+
+async function loadWardSettings() {
+  const { data } = await sb.from('ward_settings').select('*');
+  if (!data) return;
+  const s = {};
+  data.forEach(r => s[r.key] = r.value);
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  set('ws-bishop', s.bishop_contact);
+  set('ws-chapel', s.chapel_contact);
+  set('ws-calendar', s.calendar_url);
+  set('ws-cleaning', s.cleaning_url);
+}
+
+async function saveWardSettings() {
+  const updates = [
+    { key: 'bishop_contact', value: document.getElementById('ws-bishop').value.trim() },
+    { key: 'chapel_contact', value: document.getElementById('ws-chapel').value.trim() },
+    { key: 'calendar_url',   value: document.getElementById('ws-calendar').value.trim() },
+    { key: 'cleaning_url',   value: document.getElementById('ws-cleaning').value.trim() }
+  ];
+  showSaving(true);
+  for (const u of updates) {
+    await sb.from('ward_settings').upsert({ key: u.key, value: u.value, updated_at: new Date().toISOString() }, { onConflict: 'key' });
+  }
+  showSaving(false);
+  showToast('Ward settings saved');
+}
+
+function openAddMissionary() {
+  editingMissId = null;
+  ['miss-name','miss-mission','miss-hometown','miss-start'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('miss-modal-title').textContent = 'Add missionary';
+  document.getElementById('miss-delete-btn').style.display = 'none';
+  document.getElementById('miss-modal').classList.add('open');
+}
+
+async function openEditMissionary(id) {
+  const { data } = await sb.from('missionaries').select('*').eq('id', id).maybeSingle();
+  if (!data) return;
+  editingMissId = id;
+  document.getElementById('miss-name').value = data.name || '';
+  document.getElementById('miss-mission').value = data.mission || '';
+  document.getElementById('miss-hometown').value = data.hometown || '';
+  document.getElementById('miss-start').value = data.start_date || '';
+  document.getElementById('miss-modal-title').textContent = 'Edit missionary';
+  document.getElementById('miss-delete-btn').style.display = '';
+  document.getElementById('miss-modal').classList.add('open');
+}
+
+async function saveMissionary() {
+  const name = document.getElementById('miss-name').value.trim();
+  if (!name) { showToast('Name is required'); return; }
+  const payload = {
+    name,
+    mission:    document.getElementById('miss-mission').value.trim(),
+    hometown:   document.getElementById('miss-hometown').value.trim(),
+    start_date: document.getElementById('miss-start').value || null,
+    updated_at: new Date().toISOString()
+  };
+  showSaving(true);
+  if (editingMissId) {
+    await sb.from('missionaries').update(payload).eq('id', editingMissId);
+  } else {
+    await sb.from('missionaries').insert(payload);
+  }
+  showSaving(false);
+  closeModal('miss-modal');
+  renderMissionaries();
+  showToast(editingMissId ? 'Missionary updated' : 'Missionary added');
+}
+
+async function deleteMissionary() {
+  if (!editingMissId || !confirm('Remove this missionary?')) return;
+  showSaving(true);
+  await sb.from('missionaries').delete().eq('id', editingMissId);
+  showSaving(false);
+  closeModal('miss-modal');
+  renderMissionaries();
+  showToast('Missionary removed');
+}
 
 /* ── BOOT ── */
 initTheme();
