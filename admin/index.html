@@ -845,14 +845,15 @@ function renderSpeakerEditor() {
       <div class="spk-av" id="spk-av-${i}">${ini(s.name)||'?'}</div>
       <div class="spk-info">
         <input type="text" placeholder="Speaker name" value="${s.name||''}" oninput="editingSpeakers[${i}].name=this.value;document.getElementById('spk-av-${i}').textContent=ini(this.value)||'?'" style="font-weight:500;"/>
-        <input type="text" class="topic-inp" placeholder="Talk topic" value="${s.topic||''}" oninput="editingSpeakers[${i}].topic=this.value"/>
+        <input type="text" class="topic-inp" placeholder="Talk title (shown as link on public page)" value="${s.topic||''}" oninput="editingSpeakers[${i}].topic=this.value"/>
+        <input type="url" class="topic-inp" placeholder="Talk URL (optional)" value="${s.url||''}" oninput="editingSpeakers[${i}].url=this.value" style="font-size:10px;color:var(--text-3);"/>
       </div>
       <button class="remove-btn" onclick="removeSpeakerRow(${i})">×</button>
     </div>`).join('');
 }
-function addSpeakerRow() { editingSpeakers.push({name:'',topic:''}); renderSpeakerEditor(); const rows=document.querySelectorAll('.speaker-row-edit'); if(rows.length)rows[rows.length-1].querySelector('input').focus(); }
+function addSpeakerRow() { editingSpeakers.push({name:'',topic:'',url:''}); renderSpeakerEditor(); const rows=document.querySelectorAll('.speaker-row-edit'); if(rows.length)rows[rows.length-1].querySelector('input').focus(); }
 function removeSpeakerRow(i) { editingSpeakers.splice(i,1); renderSpeakerEditor(); }
-function collectSpeakers() { document.querySelectorAll('.speaker-row-edit').forEach((row,i)=>{ const inp=row.querySelectorAll('input'); if(editingSpeakers[i]){editingSpeakers[i].name=inp[0].value.trim();editingSpeakers[i].topic=inp[1].value.trim();} }); }
+function collectSpeakers() { document.querySelectorAll('.speaker-row-edit').forEach((row,i)=>{ const inp=row.querySelectorAll('input'); if(editingSpeakers[i]){editingSpeakers[i].name=inp[0].value.trim();editingSpeakers[i].topic=inp[1].value.trim();editingSpeakers[i].url=inp[2].value.trim();} }); }
 
 /* ── UI HELPERS ── */
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
