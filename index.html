@@ -7,38 +7,17 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 [data-theme="light"] {
-  --bg:        #edeae4;
-  --bg-card:   #ffffff;
-  --bg-2:      #e4e1da;
-  --text:      #18180f;
-  --text-2:    #56554e;
-  --text-3:    #9a9890;
-  --border:    rgba(0,0,0,0.12);
-  --border-2:  rgba(0,0,0,0.20);
-  --teal:      #0c6e52;
-  --teal-bg:   #ddf3ea;
-  --toggle-track: #ccc9c0;
-  --toggle-knob:  #ffffff;
+  --bg:#edeae4; --bg-card:#ffffff; --bg-2:#e4e1da; --text:#18180f; --text-2:#56554e; --text-3:#9a9890;
+  --border:rgba(0,0,0,0.12); --border-2:rgba(0,0,0,0.20); --teal:#0c6e52; --teal-bg:#ddf3ea;
+  --toggle-track:#ccc9c0; --toggle-knob:#ffffff;
 }
 [data-theme="dark"] {
-  --bg:        #18180f;
-  --bg-card:   #222219;
-  --bg-2:      #2a2a20;
-  --text:      #f0efe8;
-  --text-2:    #a8a79e;
-  --text-3:    #686860;
-  --border:    rgba(255,255,255,0.09);
-  --border-2:  rgba(255,255,255,0.16);
-  --teal:      #3fcca0;
-  --teal-bg:   #063d2e;
-  --toggle-track: #3fcca0;
-  --toggle-knob:  #18180f;
+  --bg:#18180f; --bg-card:#222219; --bg-2:#2a2a20; --text:#f0efe8; --text-2:#a8a79e; --text-3:#686860;
+  --border:rgba(255,255,255,0.09); --border-2:rgba(255,255,255,0.16); --teal:#3fcca0; --teal-bg:#063d2e;
+  --toggle-track:#3fcca0; --toggle-knob:#18180f;
 }
-
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.6; transition: background .2s, color .2s; }
-
 .nav { background: var(--bg-card); border-bottom: 1px solid var(--border-2); padding: 0 20px; height: 50px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
 .nav-brand { display: flex; align-items: center; gap: 9px; }
 .nav-logo { width: 28px; height: 28px; background: var(--teal); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: white; flex-shrink: 0; }
@@ -46,15 +25,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .nav-right { display: flex; align-items: center; gap: 12px; }
 .nav-admin { font-size: 11px; color: var(--text-3); text-decoration: none; }
 .nav-admin:hover { color: var(--teal); }
-
 .theme-toggle { cursor: pointer; position: relative; }
 .theme-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
 .tog-track { width: 38px; height: 20px; border-radius: 999px; background: var(--toggle-track); display: flex; align-items: center; padding: 2px; transition: background .2s; }
 .tog-knob { width: 16px; height: 16px; border-radius: 50%; background: var(--toggle-knob); transition: transform .2s; font-size: 9px; display: flex; align-items: center; justify-content: center; }
 [data-theme="dark"] .tog-knob { transform: translateX(18px); }
-
 .container { max-width: 540px; margin: 0 auto; padding: 28px 16px 64px; }
-
 .header-card { background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 16px; text-align: center; padding: 28px 20px 22px; margin-bottom: 12px; }
 .eyebrow { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); font-weight: 500; margin-bottom: 8px; }
 .prog-title { font-size: 30px; font-weight: 500; color: var(--text); letter-spacing: -.5px; margin-bottom: 5px; }
@@ -65,7 +41,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .prog-time { font-size: 12px; color: var(--text-3); margin-bottom: 8px; }
 .prog-address { font-size: 11px; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 3px; }
 .prog-address svg { width: 11px; height: 11px; }
-
 .block { background: var(--bg-card); border: 1px solid var(--border-2); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
 .block-label { padding: 8px 16px; background: var(--bg-2); border-bottom: 1px solid var(--border-2); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--text-3); font-weight: 500; }
 .prog-row { display: flex; align-items: baseline; padding: 10px 16px; border-bottom: 1px solid var(--border); gap: 12px; }
@@ -87,13 +62,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .div-section { display: flex; align-items: center; gap: 10px; margin: 16px 0 10px; }
 .div-section::before, .div-section::after { content:''; flex:1; height:1px; background: var(--border-2); }
 .div-label { font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
-.notes-text { padding: 6px 16px; }
-.notes-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
-.notes-item:last-child { border-bottom: none; }
-.notes-bullet { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--border-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-.notes-bullet-inner { width: 7px; height: 7px; border-radius: 2px; background: var(--teal); }
-.notes-item-text { font-size: 12px; color: var(--text-2); line-height: 1.6; flex: 1; }
-
+.notes-text { padding: 10px 16px; font-size: 12px; color: var(--text-2); line-height: 1.6; white-space: pre-wrap; }
 .loading { text-align: center; padding: 60px 20px; color: var(--text-3); font-size: 13px; }
 .loading-dot { display: inline-block; animation: pulse 1.2s ease-in-out infinite; }
 .loading-dot:nth-child(2) { animation-delay: .2s; }
@@ -105,7 +74,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .no-program p { font-size: 12px; color: var(--text-3); }
 .pub-footer { text-align: center; margin-top: 28px; font-size: 11px; color: var(--text-3); line-height: 1.8; }
 .pub-footer a { color: var(--teal); text-decoration: none; }
-
 /* BOTTOM CARDS */
 .bottom-section { margin-top: 28px; }
 .bottom-section-title { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); font-weight: 500; margin-bottom: 10px; text-align: center; }
@@ -129,31 +97,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .bcard-chevron.open { transform: rotate(180deg); }
 .bcard-body { display: none; border-top: 1px solid var(--border-2); }
 .bcard-body.open { display: block; }
-
-/* MISSIONARY LIST */
 .miss-row { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border); }
 .miss-row:last-child { border-bottom: none; }
 .miss-av { width: 48px; height: 48px; border-radius: 50%; background: var(--teal-bg); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; flex-shrink: 0; overflow: hidden; border: 1.5px solid var(--border-2); }
 .miss-av img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.miss-dates { font-size: 10px; color: var(--text-3); margin-top: 2px; }
 .miss-name { font-size: 13px; font-weight: 500; color: var(--text); }
-.miss-detail { font-size: 11px; color: var(--text-2); margin-top: 1px; line-height: 1.4; }
-
-/* WARD INFO */
+.miss-detail { font-size: 11px; color: var(--text-2); margin-top: 1px; }
+.miss-dates { font-size: 10px; color: var(--text-3); margin-top: 2px; }
 .winfo-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border); }
 .winfo-row:last-child { border-bottom: none; }
 .winfo-label { font-size: 11px; color: var(--text-3); min-width: 100px; flex-shrink: 0; padding-top: 1px; }
 .winfo-val { font-size: 12px; color: var(--text); font-weight: 500; line-height: 1.5; }
-
-/* LINK CARD */
 .bcard-link { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; text-decoration: none; }
 .bcard-link:hover { background: var(--bg-2); }
-
 @media (max-width: 480px) { .prog-title { font-size: 24px; } .container { padding: 16px 12px 48px; } }
 </style>
 </head>
 <body>
-
 <nav class="nav">
   <div class="nav-brand">
     <div class="nav-logo">41</div>
@@ -167,31 +127,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <a class="nav-admin" href="/admin/">Ward admin</a>
   </div>
 </nav>
-
 <div class="container">
   <div class="loading" id="loading">
-    <span class="loading-dot">●</span>
-    <span class="loading-dot">●</span>
-    <span class="loading-dot">●</span>
+    <span class="loading-dot">●</span><span class="loading-dot">●</span><span class="loading-dot">●</span>
     <div style="margin-top:10px;">Loading program…</div>
   </div>
   <div id="content" style="display:none;"></div>
   <div id="bottom-cards-container"></div>
 </div>
-
 <script>
-/* ── CONFIG — paste your Supabase values here ── */
 const SUPABASE_URL = 'https://girsszavoevtpcqesivk.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpcnNzemF2b2V2dHBjcWVzaXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNzU2MzIsImV4cCI6MjA5Njc1MTYzMn0.4L5rgpzNSlqHS0tRMNljCjwxUZXvj4s5jEHNtRasCxI';
-/* ─────────────────────────────────────────────── */
-
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-    storageKey: 'sb-lehi41-auth'
-  }
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: 'sb-lehi41-auth' }
 });
 
 function initTheme() {
@@ -201,79 +149,54 @@ function initTheme() {
 function applyTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   localStorage.setItem('sm_theme', dark ? 'dark' : 'light');
-  const tog = document.getElementById('tog');
-  const ico = document.getElementById('tog-icon');
+  const tog = document.getElementById('tog'), ico = document.getElementById('tog-icon');
   if (tog) tog.checked = dark;
   if (ico) ico.textContent = dark ? '🌙' : '☀️';
 }
 function toggleTheme(dark) { applyTheme(dark); }
-
 function ini(n) { return (n||'').split(' ').filter(Boolean).map(p=>p[0].toUpperCase()).slice(0,2).join(''); }
-
 function formatDate(d) {
   if (!d) return '—';
-  const dt = new Date(d + 'T00:00:00');
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const date = dt.getDate();
-  const suffix = (date===1||date===21||date===31)?'st':(date===2||date===22)?'nd':(date===3||date===23)?'rd':'th';
+  const dt = new Date(d+'T00:00:00');
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const date=dt.getDate(), suffix=(date===1||date===21||date===31)?'st':(date===2||date===22)?'nd':(date===3||date===23)?'rd':'th';
   return `${days[dt.getDay()]} — ${months[dt.getMonth()]} ${date}${suffix}, ${dt.getFullYear()}`;
 }
-
+function formatMissDate(d) {
+  if (!d) return '';
+  return new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'});
+}
 function hymnRow(hymn, label) {
   if (!hymn?.num && !hymn?.title) return `<div class="prog-row"><span class="row-lbl">${label}</span><span class="row-val empty">—</span></div>`;
   const numStr = hymn.num ? `<span class="hymn-num">#${hymn.num}</span><span class="hymn-sep">—</span>` : '';
   const link = hymn.url ? `<br><a class="hymn-link" href="${hymn.url}" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Sing</a>` : '';
   return `<div class="prog-row"><span class="row-lbl">${label}</span><div style="flex:1;">${numStr}<span class="hymn-title">${hymn.title||''}</span>${link}</div></div>`;
 }
-
+function toggleCard(id) {
+  const body = document.getElementById('bcard-body-'+id);
+  const chev = document.getElementById('bcard-chev-'+id);
+  if (!body) return;
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
 async function loadProgram() {
   const today = new Date().toISOString().split('T')[0];
-
-  const { data, error } = await sb
-    .from('programs')
-    .select('*')
-    .eq('status', 'published')
-    .gte('date', today)
-    .order('date', { ascending: true })
-    .limit(1)
-    .maybeSingle();
-
-  let prog = data;
+  let { data: prog, error } = await sb.from('programs').select('*').eq('status','published').gte('date',today).order('date',{ascending:true}).limit(1).maybeSingle();
   if (!prog && !error) {
-    const { data: past } = await sb
-      .from('programs')
-      .select('*')
-      .eq('status', 'published')
-      .order('date', { ascending: false })
-      .limit(1)
-      .maybeSingle();
+    const { data: past } = await sb.from('programs').select('*').eq('status','published').order('date',{ascending:false}).limit(1).maybeSingle();
     prog = past;
   }
-
   document.getElementById('loading').style.display = 'none';
   document.getElementById('content').style.display = '';
-
-  if (error) {
-    document.getElementById('content').innerHTML = `<div class="no-program"><p style="color:#A32D2D;">Unable to load program. Please try again.</p></div>`;
-    return;
-  }
-
+  if (error) { document.getElementById('content').innerHTML = `<div class="no-program"><p style="color:#A32D2D;">Unable to load program. Please try again.</p></div>`; return; }
   if (!prog) {
-    document.getElementById('content').innerHTML = `
-      <div class="no-program">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-        <h2>No program available yet</h2>
-        <p>Check back closer to Sunday.</p>
-      </div>`;
-    return;
+    document.getElementById('content').innerHTML = `<div class="no-program"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><h2>No program available yet</h2><p>Check back closer to Sunday.</p></div>`;
+    loadBottomCards(); return;
   }
-
-  const h = prog.hymns || {};
-  const speakers = (prog.speakers || []).filter(s => s.name);
-
+  const h = prog.hymns||{}, speakers=(prog.speakers||[]).filter(s=>s.name);
   document.getElementById('content').innerHTML = `
-    <div class="header-card">
+ <div class="header-card">
       <div class="eyebrow">Come Worship Jesus Christ With Us</div>
       <div class="prog-title">SACRAMENT PROGRAM</div>
       <img src="https://www.churchofjesuschrist.org/imgs/09caf898c82711edb4eeeeeeac1eca3562596835/full/%21500%2C/0/default" 
@@ -289,7 +212,6 @@ async function loadProgram() {
         680 N 350 W, American Fork, UT 84003
       </a>
     </div>
-
     <div class="block">
       <div class="block-label">Leadership</div>
       <div class="prog-row"><span class="row-lbl">Presiding</span><span class="row-val">${prog.presiding||'—'}</span></div>
@@ -297,206 +219,87 @@ async function loadProgram() {
       <div class="prog-row"><span class="row-lbl">Chorister</span><span class="row-val">${prog.chorister||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Pianist</span><span class="row-val">${prog.pianist||'—'}</span></div>
     </div>
-
     <div class="block">
       <div class="block-label">Opening</div>
-      ${hymnRow(h.opening, 'Opening hymn')}
+      ${hymnRow(h.opening,'Opening hymn')}
       <div class="prog-row"><span class="row-lbl">Invocation</span><span class="row-val">${prog.invocation||'—'}</span></div>
     </div>
-
     <div class="div-section"><span class="div-label">Ward &amp; Stake Business</span></div>
-
-    ${prog.notes ? `<div class="block"><div class="block-label">Announcements</div><div class="notes-text">${prog.notes.split('\n').filter(l=>l.trim()).map(line=>'<div class="notes-item"><div class="notes-bullet"><div class="notes-bullet-inner"></div></div><span class="notes-item-text">'+line.trim().replace(/^[-\u2022*]\s*/,'')+'</span></div>').join('')}</div></div>` : ''}
-
+    ${prog.notes?`<div class="block"><div class="block-label">Announcements</div><div class="notes-text">${prog.notes}</div></div>`:''}
     <div class="block">
       <div class="block-label">Sacrament</div>
-      ${hymnRow(h.sacrament, 'Sacrament hymn')}
+      ${hymnRow(h.sacrament,'Sacrament hymn')}
     </div>
-
     <div class="div-section"><span class="div-label">Administration of the Sacrament</span></div>
-
-    ${speakers.length ? `
-    <div class="block">
-      <div class="block-label">Speakers</div>
-      ${speakers.map(s=>`
-        <div class="speaker-row">
-          <div class="speaker-av">${ini(s.name)}</div>
-          <div>
-            <div class="speaker-name">${s.name}</div>
-            ${s.topic && s.topic !== 'Assigned talk topic' ? `
-              <div class="speaker-topic">
-                ${s.url
-                  ? `<a href="${s.url}" target="_blank" style="color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:3px;">${s.topic}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`
-                  : s.topic}
-              </div>` : ''}
-          </div>
-        </div>`).join('')}
-    </div>` : ''}
-
-    ${h.rest?.num ? `
-    <div class="block">
-      <div class="block-label">Rest hymn</div>
-      ${hymnRow(h.rest, 'Rest hymn')}
-    </div>` : ''}
-
+    ${speakers.length?`<div class="block"><div class="block-label">Speakers</div>${speakers.map(s=>`
+      <div class="speaker-row">
+        <div class="speaker-av">${ini(s.name)}</div>
+        <div>
+          <div class="speaker-name">${s.name}</div>
+          ${s.topic&&s.topic!=='Assigned talk topic'?`<div class="speaker-topic">${s.url?`<a href="${s.url}" target="_blank" style="color:var(--teal);text-decoration:none;display:inline-flex;align-items:center;gap:3px;">${s.topic}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:10px;height:10px;flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>`:s.topic}</div>`:''}</div></div>`).join('')}</div>`:''}
+    ${h.rest?.num?`<div class="block"><div class="block-label">Rest hymn</div>${hymnRow(h.rest,'Rest hymn')}</div>`:''}
     <div class="block">
       <div class="block-label">Closing</div>
-      ${hymnRow(h.closing, 'Closing hymn')}
+      ${hymnRow(h.closing,'Closing hymn')}
       <div class="prog-row"><span class="row-lbl">Benediction</span><span class="row-val">${prog.benediction||'—'}</span></div>
     </div>
-
     <div class="pub-footer">
       Lehi 41st Ward (Tongan) · The Church of Jesus Christ of Latter-day Saints<br>
       <a href="/admin/">Ward admin sign in</a>
-    </div>
-  `;
-
-  // Load bottom cards after program renders
+    </div>`;
   loadBottomCards();
 }
-
-
-function formatMissDate(d) {
-  if (!d) return '';
-  const dt = new Date(d + 'T00:00:00');
-  return dt.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-}
-
-function toggleCard(id) {
-  const body = document.getElementById('bcard-body-' + id);
-  const chev = document.getElementById('bcard-chev-' + id);
-  if (!body) return;
-  body.classList.toggle('open');
-  chev.classList.toggle('open');
-}
-
 async function loadBottomCards() {
   const container = document.getElementById('bottom-cards-container');
   if (!container) return;
-
-  // Load missionaries and settings in parallel
   const [{ data: missionaries }, { data: settings }] = await Promise.all([
     sb.from('missionaries').select('*').order('sort_order').order('start_date'),
     sb.from('ward_settings').select('*')
   ]);
-
   const s = {};
-  (settings || []).forEach(r => s[r.key] = r.value);
-
-  const calUrl = s.calendar_url || '';
-  const cleanUrl = s.cleaning_url || '';
-  const bishopContact = s.bishop_contact || 'Contact the ward office';
-  const chapelContact = s.chapel_contact || 'Contact the ward office';
-
-  // MISSIONARIES CARD
-  const missHTML = (missionaries && missionaries.length) ? missionaries.map(m => {
-    const startStr = m.start_date ? formatMissDate(m.start_date) : null;
-    const endStr = m.end_date ? formatMissDate(m.end_date) : null;
-    const dateRange = startStr && endStr ? `${startStr} – ${endStr}`
-                    : startStr ? `Since ${startStr}`
-                    : '';
-    const photoEl = m.photo_url
-      ? `<img src="${m.photo_url}" alt="${m.name}" />`
-      : ini(m.name);
-    return `
-    <div class="miss-row">
-      <div class="miss-av">${photoEl}</div>
-      <div style="flex:1;">
-        <div class="miss-name">${m.name}</div>
-        ${m.mission ? `<div class="miss-detail">${m.mission}</div>` : ''}
-        ${dateRange ? `<div class="miss-dates">${dateRange}</div>` : ''}
-      </div>
-    </div>`;
-  }).join('')
-  : '<div style="padding:16px;font-size:12px;color:var(--text-3);text-align:center;">No missionaries listed yet</div>';
-
+  (settings||[]).forEach(r => s[r.key]=r.value);
+  const calUrl=s.calendar_url||'', cleanUrl=s.cleaning_url||'';
+  const bishopContact=s.bishop_contact||'Contact the ward office';
+  const chapelContact=s.chapel_contact||'Contact the ward office';
+  const missHTML = (missionaries&&missionaries.length) ? missionaries.map(m=>{
+    const startStr=m.start_date?formatMissDate(m.start_date):null;
+    const endStr=m.end_date?formatMissDate(m.end_date):null;
+    const dateRange=startStr&&endStr?`${startStr} – ${endStr}`:startStr?`Since ${startStr}`:'';
+    const photoEl=m.photo_url?`<img src="${m.photo_url}" alt="${m.name}"/>`:ini(m.name);
+    return `<div class="miss-row"><div class="miss-av">${photoEl}</div><div style="flex:1;"><div class="miss-name">${m.name}</div>${m.mission?`<div class="miss-detail">${m.mission}</div>`:''} ${dateRange?`<div class="miss-dates">${dateRange}</div>`:''}</div></div>`;
+  }).join('') : '<div style="padding:16px;font-size:12px;color:var(--text-3);text-align:center;">No missionaries listed yet</div>';
   container.innerHTML = `
     <div class="bottom-section">
       <div class="bottom-section-title">Ward Resources</div>
       <div class="bottom-cards">
-
-        <!-- MISSIONARIES -->
         <div class="bcard">
           <div class="bcard-trigger" onclick="toggleCard('miss')">
             <div class="bcard-left">
-              <div class="bcard-icon teal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-              </div>
-              <div>
-                <div class="bcard-name">Serving Missionaries</div>
-                <div class="bcard-desc">${missionaries ? missionaries.length : 0} currently serving</div>
-              </div>
+              <div class="bcard-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+              <div><div class="bcard-name">Serving Missionaries</div><div class="bcard-desc">${missionaries?missionaries.length:0} currently serving</div></div>
             </div>
             <svg id="bcard-chev-miss" class="bcard-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div id="bcard-body-miss" class="bcard-body">${missHTML}</div>
         </div>
-
-        <!-- WARD INFO -->
         <div class="bcard">
           <div class="bcard-trigger" onclick="toggleCard('info')">
             <div class="bcard-left">
-              <div class="bcard-icon blue">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              </div>
-              <div>
-                <div class="bcard-name">Ward Information</div>
-                <div class="bcard-desc">Appointments &amp; chapel scheduling</div>
-              </div>
+              <div class="bcard-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div><div class="bcard-name">Ward Information</div><div class="bcard-desc">Appointments &amp; chapel scheduling</div></div>
             </div>
             <svg id="bcard-chev-info" class="bcard-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div id="bcard-body-info" class="bcard-body">
-            <div class="winfo-row">
-              <span class="winfo-label">Bishop appt.</span>
-              <span class="winfo-val">To setup an appointment with the Bishop or Bishopric contact:<br><strong>${bishopContact}</strong></span>
-            </div>
-            <div class="winfo-row">
-              <span class="winfo-label">Chapel</span>
-              <span class="winfo-val">To schedule the chapel contact:<br><strong>${chapelContact}</strong></span>
-            </div>
+            <div class="winfo-row"><span class="winfo-label">Bishop appt.</span><span class="winfo-val">To setup an appointment with the Bishop or Bishopric contact:<br><strong>${bishopContact}</strong></span></div>
+            <div class="winfo-row"><span class="winfo-label">Chapel</span><span class="winfo-val">To schedule the chapel contact:<br><strong>${chapelContact}</strong></span></div>
           </div>
         </div>
-
-        <!-- WARD CALENDAR -->
-        ${calUrl ? `
-        <div class="bcard">
-          <a class="bcard-link" href="${calUrl}" target="_blank">
-            <div class="bcard-left">
-              <div class="bcard-icon amber">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
-              <div>
-                <div class="bcard-name">Ward Calendar</div>
-                <div class="bcard-desc">View upcoming events</div>
-              </div>
-            </div>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:15px;height:15px;color:var(--text-3);flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </div>` : ''}
-
-        <!-- CHAPEL CLEANING -->
-        ${cleanUrl ? `
-        <div class="bcard">
-          <a class="bcard-link" href="${cleanUrl}" target="_blank">
-            <div class="bcard-left">
-              <div class="bcard-icon green">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div>
-                <div class="bcard-name">Chapel Cleaning</div>
-                <div class="bcard-desc">View cleaning assignments</div>
-              </div>
-            </div>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:15px;height:15px;color:var(--text-3);flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </div>` : ''}
-
+        ${calUrl?`<div class="bcard"><a class="bcard-link" href="${calUrl}" target="_blank"><div class="bcard-left"><div class="bcard-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="bcard-name">Ward Calendar</div><div class="bcard-desc">View upcoming events</div></div></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:15px;height:15px;color:var(--text-3);flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>`:''}
+        ${cleanUrl?`<div class="bcard"><a class="bcard-link" href="${cleanUrl}" target="_blank"><div class="bcard-left"><div class="bcard-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="bcard-name">Chapel Cleaning</div><div class="bcard-desc">View cleaning assignments</div></div></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:15px;height:15px;color:var(--text-3);flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>`:''}
       </div>
-    </div>
-  `;
+    </div>`;
 }
-
 initTheme();
 loadProgram();
 </script>
