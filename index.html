@@ -124,7 +124,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <input type="checkbox" id="tog" onchange="toggleTheme(this.checked)">
       <div class="tog-track"><div class="tog-knob" id="tog-icon">☀️</div></div>
     </label>
-    <a class="nav-admin" href="/admin/">Ward admin</a>
+    <a class="nav-admin" href="/admin/">Admin Login</a>
   </div>
 </nav>
 <div class="container">
@@ -196,13 +196,13 @@ async function loadProgram() {
   }
   const h = prog.hymns||{}, speakers=(prog.speakers||[]).filter(s=>s.name);
   document.getElementById('content').innerHTML = `
- <div class="header-card">
-      <div class="eyebrow">Come Worship Jesus Christ With Us</div>
-      <div class="prog-title">SACRAMENT PROGRAM</div>
+    <div class="header-card">
+      <div class="eyebrow">THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS</div>
       <img src="https://www.churchofjesuschrist.org/imgs/09caf898c82711edb4eeeeeeac1eca3562596835/full/%21500%2C/0/default" 
        alt="Jesus Christ" 
        style="width:100px;height:100px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 12px;display:block;border:2px solid var(--border-2);">
-      <div class="church-name">THE CHURCH OF JESUS CHRIST OF LATTER-DAY SAINTS</div>
+      <div class="prog-title">SACRAMENT PROGRAM</div>
+      <div class="church-name">COME WORSHIP JESUS CHRIST WITH US * ALL WELCOME</div>
       <div class="hdr-rule"></div>
       <div class="ward-name">Lehi Utah 3rd Stake — Lehi 41st Ward (Tongan)</div>
       <div class="prog-date">${formatDate(prog.date)}</div>
@@ -213,21 +213,21 @@ async function loadProgram() {
       </a>
     </div>
     <div class="block">
-      <div class="block-label">Leadership</div>
+      <div class="block-label">Opening</div>
       <div class="prog-row"><span class="row-lbl">Presiding</span><span class="row-val">${prog.presiding||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Conducting</span><span class="row-val">${prog.conducting||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Chorister</span><span class="row-val">${prog.chorister||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Pianist</span><span class="row-val">${prog.pianist||'—'}</span></div>
     </div>
     <div class="block">
-      <div class="block-label">Opening</div>
+      <div class="block-label">Hymn & Invocation</div>
       ${hymnRow(h.opening,'Opening hymn')}
       <div class="prog-row"><span class="row-lbl">Invocation</span><span class="row-val">${prog.invocation||'—'}</span></div>
     </div>
     <div class="div-section"><span class="div-label">Ward &amp; Stake Business</span></div>
     ${prog.notes?`<div class="block"><div class="block-label">Announcements</div><div class="notes-text">${prog.notes}</div></div>`:''}
     <div class="block">
-      <div class="block-label">Sacrament</div>
+      <div class="block-label">Ordinance of the Sacrament</div>
       ${hymnRow(h.sacrament,'Sacrament hymn')}
     </div>
     <div class="div-section"><span class="div-label">Administration of the Sacrament</span></div>
@@ -253,14 +253,17 @@ async function loadBottomCards() {
   const container = document.getElementById('bottom-cards-container');
   if (!container) return;
   const [{ data: missionaries }, { data: settings }] = await Promise.all([
-    sb.from('missionaries').select('*').order('sort_order').order('start_date'),
+    sb.from('missionaries').select('*').order('end_date', { ascending: true }).order('start_date', { ascending: true }),
     sb.from('ward_settings').select('*')
   ]);
   const s = {};
   (settings||[]).forEach(r => s[r.key]=r.value);
   const calUrl=s.calendar_url||'', cleanUrl=s.cleaning_url||'';
-  const bishopContact=s.bishop_contact||'Contact the ward office';
-  const chapelContact=s.chapel_contact||'Contact the ward office';
+  const bishopContact  = s.bishop_contact  || 'Contact the ward office';
+  const chapelContact  = s.chapel_contact  || 'Contact the ward office';
+  const templeContact  = s.temple_contact  || '';
+  const stakeContact   = s.stake_contact   || '';
+  const stakeAddress   = s.stake_address   || '';
   const missHTML = (missionaries&&missionaries.length) ? missionaries.map(m=>{
     const startStr=m.start_date?formatMissDate(m.start_date):null;
     const endStr=m.end_date?formatMissDate(m.end_date):null;
@@ -293,6 +296,9 @@ async function loadBottomCards() {
           <div id="bcard-body-info" class="bcard-body">
             <div class="winfo-row"><span class="winfo-label">Bishop appt.</span><span class="winfo-val">To setup an appointment with the Bishop or Bishopric contact:<br><strong>${bishopContact}</strong></span></div>
             <div class="winfo-row"><span class="winfo-label">Chapel</span><span class="winfo-val">To schedule the chapel contact:<br><strong>${chapelContact}</strong></span></div>
+            ${templeContact ? `<div class="winfo-row"><span class="winfo-label">Temple rec.</span><span class="winfo-val">Temple recommend renewal &amp; endorsement appointments:<br><strong>${templeContact}</strong></span></div>` : ''}
+            ${stakeContact ? `<div class="winfo-row"><span class="winfo-label">Pres. Paongo</span><span class="winfo-val">Appointments for President Paongo:<br><strong>${stakeContact}</strong></span></div>` : ''}
+            ${stakeAddress ? `<div class="winfo-row"><span class="winfo-label">Stake office</span><span class="winfo-val"><a href="https://maps.app.goo.gl/8w6JqnUFXgujLkpN9" target="_blank" style="color:var(--teal);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${stakeAddress}</a></span></div>` : ''}
           </div>
         </div>
         ${calUrl?`<div class="bcard"><a class="bcard-link" href="${calUrl}" target="_blank"><div class="bcard-left"><div class="bcard-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="bcard-name">Ward Calendar</div><div class="bcard-desc">View upcoming events</div></div></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:15px;height:15px;color:var(--text-3);flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>`:''}
