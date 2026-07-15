@@ -418,8 +418,34 @@ tr:hover td { background: var(--bg-2); }
         <div class="field"><label>Full name</label><input type="text" id="miss-name" placeholder="Elder / Sister Full Name"/></div>
         <div class="field"><label>Mission</label><input type="text" id="miss-mission" placeholder="e.g. New Zealand Auckland Mission"/></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div class="field"><label>Start (month &amp; year)</label><input type="month" id="miss-start"/></div>
-          <div class="field"><label>End (month &amp; year)</label><input type="month" id="miss-end"/></div>
+          <div class="field"><label>Start</label>
+            <div style="display:flex;gap:5px;">
+              <select id="miss-start-m" style="flex:1;">
+                <option value="">Month</option>
+                <option value="01">January</option><option value="02">February</option>
+                <option value="03">March</option><option value="04">April</option>
+                <option value="05">May</option><option value="06">June</option>
+                <option value="07">July</option><option value="08">August</option>
+                <option value="09">September</option><option value="10">October</option>
+                <option value="11">November</option><option value="12">December</option>
+              </select>
+              <select id="miss-start-y" style="width:90px;flex-shrink:0;"></select>
+            </div>
+          </div>
+          <div class="field"><label>End</label>
+            <div style="display:flex;gap:5px;">
+              <select id="miss-end-m" style="flex:1;">
+                <option value="">Month</option>
+                <option value="01">January</option><option value="02">February</option>
+                <option value="03">March</option><option value="04">April</option>
+                <option value="05">May</option><option value="06">June</option>
+                <option value="07">July</option><option value="08">August</option>
+                <option value="09">September</option><option value="10">October</option>
+                <option value="11">November</option><option value="12">December</option>
+              </select>
+              <select id="miss-end-y" style="width:90px;flex-shrink:0;"></select>
+            </div>
+          </div>
         </div>
         <div class="field">
           <label>Photo</label>
@@ -1026,12 +1052,13 @@ async function saveWardSettings() {
 
 function openAddMissionary() {
   editingMissId = null;
-  ['miss-name','miss-mission','miss-start','miss-end'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  ['miss-name','miss-mission','miss-start-m','miss-start-y','miss-end-m','miss-end-y'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
   const fp = document.getElementById('miss-photo-file'); if(fp) fp.value='';
   const prev = document.getElementById('miss-photo-preview'); if(prev) prev.style.display='none';
   editingMissPhotoUrl = null;
   document.getElementById('miss-modal-title').textContent = 'Add missionary';
   document.getElementById('miss-delete-btn').style.display = 'none';
+  populateYearSelects();
   document.getElementById('miss-modal').classList.add('open');
 }
 
@@ -1041,8 +1068,8 @@ async function openEditMissionary(id) {
   editingMissId = id;
   document.getElementById('miss-name').value = data.name || '';
   document.getElementById('miss-mission').value = data.mission || '';
-  document.getElementById('miss-start').value = data.start_date ? data.start_date.slice(0,7) : '';
-  document.getElementById('miss-end').value = data.end_date ? data.end_date.slice(0,7) : '';
+  if(data.start_date){ document.getElementById('miss-start-m').value=data.start_date.slice(5,7); document.getElementById('miss-start-y').value=data.start_date.slice(0,4); } else { document.getElementById('miss-start-m').value=''; document.getElementById('miss-start-y').value=''; }
+  if(data.end_date){ document.getElementById('miss-end-m').value=data.end_date.slice(5,7); document.getElementById('miss-end-y').value=data.end_date.slice(0,4); } else { document.getElementById('miss-end-m').value=''; document.getElementById('miss-end-y').value=''; }
   const fp = document.getElementById('miss-photo-file'); if(fp) fp.value='';
   editingMissPhotoUrl = data.photo_url || null;
   const prev = document.getElementById('miss-photo-preview');
@@ -1051,6 +1078,7 @@ async function openEditMissionary(id) {
   else { prev.style.display='none'; }
   document.getElementById('miss-modal-title').textContent = 'Edit missionary';
   document.getElementById('miss-delete-btn').style.display = '';
+  populateYearSelects();
   document.getElementById('miss-modal').classList.add('open');
 }
 
@@ -1080,13 +1108,15 @@ async function saveMissionary() {
     photoUrl = urlData.publicUrl;
   }
 
-  const startVal = document.getElementById('miss-start').value;
-  const endVal = document.getElementById('miss-end').value;
+  const startM = document.getElementById('miss-start-m').value;
+  const startY = document.getElementById('miss-start-y').value;
+  const endM   = document.getElementById('miss-end-m').value;
+  const endY   = document.getElementById('miss-end-y').value;
   const payload = {
     name,
     mission:    document.getElementById('miss-mission').value.trim() || null,
-    start_date: startVal ? startVal + '-01' : null,
-    end_date:   endVal   ? endVal   + '-01' : null,
+    start_date: (startM && startY) ? `${startY}-${startM}-01` : null,
+    end_date:   (endM && endY)     ? `${endY}-${endM}-01`     : null,
     photo_url:  photoUrl || null,
     updated_at: new Date().toISOString()
   };
@@ -1125,6 +1155,16 @@ async function deleteMissionary() {
 }
 
 /* ── BOOT ── */
+function populateYearSelects() {
+  const now = new Date().getFullYear();
+  const years = [];
+  for (let y = now - 2; y <= now + 3; y++) years.push(y);
+  ['miss-start-y','miss-end-y'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    sel.innerHTML = '<option value="">Year</option>' + years.map(y => `<option value="${y}">${y}</option>`).join('');
+  });
+}
 initTheme();
 checkSession();
 
