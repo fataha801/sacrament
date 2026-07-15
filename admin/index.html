@@ -223,7 +223,95 @@ tr:hover td { background: var(--bg-2); }
 
 .hint-box { padding: 10px 14px; border-radius: 8px; background: var(--teal-bg); font-size: 12px; color: var(--teal); line-height: 1.5; margin-top: 10px; }
 
-@media (max-width:680px) { .sidebar{display:none;} .page{padding:14px;} .form-grid{grid-template-columns:1fr;} .nav-sub{display:none;} }
+/* MOBILE FAB */
+.fab { display: none; position: fixed; bottom: 72px; right: 16px; width: 48px; height: 48px; border-radius: 50%; background: var(--teal); color: #fff; border: none; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 89; font-size: 24px; line-height: 1; }
+@media (max-width:680px) { .fab { display: flex; } }
+.bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg-card); border-top: 1px solid var(--border-2); z-index: 90; padding-bottom: env(safe-area-inset-bottom); }
+.bottom-nav-inner { display: flex; align-items: stretch; height: 100%; padding: 0 4px; }
+.bnav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: none; background: none; color: var(--text-3); font-family: inherit; cursor: pointer; padding: 6px 2px; -webkit-tap-highlight-color: transparent; }
+.bnav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+.bnav-item span { font-size: 10px; font-weight: 500; }
+.bnav-item.active { color: var(--teal); }
+@media (max-width:680px) {
+  /* LAYOUT */
+  .sidebar { display: none; }
+  .bottom-nav { display: flex; }
+  .main { padding-bottom: 76px; }
+  .page { padding: 14px 12px 20px; }
+  .nav-sub { display: none; }
+  .nav-title { font-size: 12px; }
+  .user-name { display: none; }
+  .nav { padding: 0 12px; }
+
+  /* STATS */
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .stat-card { padding: 12px 12px; }
+  .stat-val { font-size: 26px; }
+
+  /* DASHBOARD CARDS */
+  .card-hdr { flex-wrap: wrap; gap: 6px; padding: 10px 12px; }
+  .card-body { padding: 12px; }
+  .card { border-radius: 10px; }
+
+  /* FORMS - bigger touch targets */
+  .form-grid { grid-template-columns: 1fr; gap: 14px; }
+  .field input, .field select, .field textarea {
+    padding: 11px 12px;
+    font-size: 16px; /* prevents iOS zoom */
+    border-radius: 10px;
+  }
+  .field label { font-size: 12px; margin-bottom: 2px; }
+  .field { gap: 4px; }
+  .field textarea { min-height: 80px; }
+
+  /* HYMN ROWS */
+  .hymn-row { flex-direction: column; gap: 8px; }
+  .hymn-row input { width: 100% !important; font-size: 16px; padding: 11px 12px; }
+
+  /* TABS */
+  .tabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { padding: 10px 14px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+
+  /* MODAL - bottom sheet */
+  .modal-backdrop { padding: 0; align-items: flex-end; }
+  .modal { border-radius: 20px 20px 0 0; max-height: 95vh; overflow-y: auto; margin: 0; width: 100%; }
+  .modal-body { padding: 16px; }
+  .modal-hdr { padding: 14px 16px; border-radius: 20px 20px 0 0; position: sticky; top: 0; z-index: 10; }
+  .modal-footer { padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom)); position: sticky; bottom: 0; background: var(--bg-card); z-index: 10; }
+  .modal-title { font-size: 15px; }
+  .modal-close { font-size: 22px; padding: 6px; }
+
+  /* BUTTONS - bigger touch targets */
+  .btn { padding: 8px 14px; font-size: 13px; }
+  .btn-sm { padding: 7px 12px; font-size: 12px; }
+  .btn-primary { padding: 10px 16px; }
+  .modal-footer .btn-primary { flex: 1; justify-content: center; padding: 12px; font-size: 14px; }
+  .modal-footer .btn-sm { padding: 10px 14px; font-size: 13px; }
+
+  /* PAGE HEADERS */
+  .page-title { font-size: 20px; }
+  .page-sub { font-size: 12px; }
+
+  /* SPEAKER EDITOR */
+  .speaker-row-edit { padding: 10px; gap: 8px; }
+  .spk-info input { font-size: 15px; padding: 4px 0; }
+  .add-row-btn { padding: 12px; font-size: 13px; }
+  .remove-btn { font-size: 22px; padding: 4px 8px; }
+
+  /* MISSIONARY MODAL DATE PICKERS */
+  #miss-modal .field select { font-size: 16px; padding: 11px 10px; }
+
+  /* WARD INFO FIELDS */
+  #page-resources .field input { font-size: 16px; padding: 11px 12px; }
+  #page-resources .btn-primary { width: 100%; justify-content: center; padding: 12px; font-size: 14px; margin-top: 10px; }
+
+  /* HIDE TABLE WRAP ON MOBILE - use card list instead */
+  .mobile-hide { display: none; }
+  .mobile-card-list { display: flex; flex-direction: column; gap: 8px; }
+}
+@media (min-width:681px) {
+  .mobile-card-list { display: none; }
+}
 </style>
 </head>
 <body>
@@ -333,14 +421,15 @@ tr:hover td { background: var(--bg-2); }
       <div class="page" id="page-programs">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
           <div><div class="page-title">All programs</div><div class="page-sub">Weekly sacrament meeting records</div></div>
-          <button class="btn btn-primary" onclick="openNewProgram()">
+          <button class="btn btn-primary mobile-hide" onclick="openNewProgram()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>New program
           </button>
         </div>
-        <div class="card"><div class="table-wrap"><table>
+        <div class="card mobile-hide"><div class="table-wrap"><table>
           <thead><tr><th style="width:120px">Date</th><th style="width:80px">Status</th><th>Speakers</th><th style="width:110px">Presiding</th><th style="width:80px"></th></tr></thead>
           <tbody id="programs-tbody"></tbody>
         </table></div></div>
+        <div class="mobile-card-list" id="programs-mobile-list"></div>
       </div>
 
       <!-- REPEAT TRACKER PAGE -->
@@ -365,10 +454,11 @@ tr:hover td { background: var(--bg-2); }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Invite user
           </button>
         </div>
-        <div class="card"><div class="table-wrap"><table>
+        <div class="card mobile-hide"><div class="table-wrap"><table>
           <thead><tr><th>User</th><th style="width:90px">Role</th><th style="width:80px"></th></tr></thead>
           <tbody id="users-tbody"></tbody>
         </table></div></div>
+        <div class="mobile-card-list" id="users-mobile-list"></div>
       </div>
 
       <!-- MISSIONARIES & WARD INFO PAGE -->
@@ -382,10 +472,11 @@ tr:hover td { background: var(--bg-2); }
 
         <div class="card" style="margin-bottom:14px;">
           <div class="card-hdr"><span class="card-title">Serving Missionaries</span></div>
-          <div class="table-wrap"><table>
+          <div class="table-wrap mobile-hide"><table>
             <thead><tr><th>Photo</th><th>Name</th><th>Mission</th><th style="width:100px">Start</th><th style="width:100px">End</th><th style="width:70px"></th></tr></thead>
             <tbody id="miss-tbody"></tbody>
           </table></div>
+          <div class="mobile-card-list" id="miss-mobile-list" style="padding:10px;gap:8px;"></div>
         </div>
 
         <div class="card" style="margin-bottom:14px;">
@@ -468,6 +559,35 @@ tr:hover td { background: var(--bg-2); }
     </div>
   </div>
 </div>
+
+<!-- MOBILE FAB - New Program -->
+<button class="fab" id="mobile-fab" onclick="openNewProgram()" title="New program">+</button>
+
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav" id="bottom-nav" style="display:none;">
+  <div class="bottom-nav-inner">
+    <button class="bnav-item active" id="bnav-dashboard" onclick="showPage('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="bnav-item" id="bnav-programs" onclick="showPage('programs')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      <span>Programs</span>
+    </button>
+    <button class="bnav-item" id="bnav-history" onclick="showPage('history')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+      <span>Tracker</span>
+    </button>
+    <button class="bnav-item" id="bnav-resources" onclick="showPage('resources')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      <span>Ward</span>
+    </button>
+    <button class="bnav-item" id="bnav-users" onclick="showPage('users')" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span>Users</span>
+    </button>
+  </div>
+</nav>
 
 <!-- PROGRAM EDITOR MODAL -->
 <div class="modal-backdrop" id="program-modal">
@@ -632,7 +752,14 @@ async function onSignedIn(user) {
   if (currentUser.picture) av.innerHTML = `<img src="${currentUser.picture}" alt="">`;
   else av.textContent = ini(currentUser.name);
 
-  if (currentUser.role === 'admin') document.getElementById('admin-nav').style.display = '';
+  if (currentUser.role === 'admin') {
+    document.getElementById('admin-nav').style.display = '';
+    const bnavUsers = document.getElementById('bnav-users');
+    if (bnavUsers) bnavUsers.style.display = '';
+  }
+  // Show bottom nav
+  const bn = document.getElementById('bottom-nav');
+  if (bn) bn.style.display = 'flex';
 
   await loadPrograms();
   showPage('dashboard');
@@ -686,9 +813,13 @@ async function loadPrograms() {
 function showPage(p) {
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(el => el.classList.remove('active'));
   document.getElementById('page-' + p).classList.add('active');
   const nav = document.getElementById('nav-' + p);
   if (nav) nav.classList.add('active');
+  const bnav = document.getElementById('bnav-' + p);
+  if (bnav) bnav.classList.add('active');
+  window.scrollTo(0, 0);
 
   if (p === 'dashboard') renderDashboard();
   if (p === 'programs') renderPrograms();
@@ -764,7 +895,12 @@ function renderRepeatWarnings(upcoming) {
 
 function renderPrograms() {
   const tbody = document.getElementById('programs-tbody');
-  if (!allPrograms.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-3);padding:28px;">No programs yet</td></tr>'; return; }
+  const mobileList = document.getElementById('programs-mobile-list');
+  if (!allPrograms.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-3);padding:28px;">No programs yet</td></tr>';
+    if(mobileList) mobileList.innerHTML = '<div style="text-align:center;color:var(--text-3);padding:28px;font-size:13px;">No programs yet</div>';
+    return;
+  }
   tbody.innerHTML = allPrograms.map(p=>`<tr>
     <td><div style="font-size:12px;font-weight:500;">${fmtDate(p.date).replace(/,.*/,'')}</div><div style="font-size:10px;color:var(--text-3);">${p.date}</div></td>
     <td><span class="badge badge-${p.status==='published'?'published':'draft'}">${p.status}</span></td>
@@ -772,6 +908,17 @@ function renderPrograms() {
     <td style="font-size:11px;">${p.presiding||'—'}</td>
     <td><button class="btn btn-sm" onclick="openEditProgram('${p.id}')">Edit</button></td>
   </tr>`).join('');
+  if(mobileList) mobileList.innerHTML = allPrograms.map(p=>`
+    <div onclick="openEditProgram('${p.id}')" style="background:var(--bg-card);border:1px solid var(--border-2);border-radius:12px;padding:14px 16px;cursor:pointer;active:opacity:.8;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div style="font-size:14px;font-weight:500;">${fmtDate(p.date).replace(/,.*/,'')}</div>
+        <span class="badge badge-${p.status==='published'?'published':'draft'}">${p.status}</span>
+      </div>
+      <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;">${p.date}</div>
+      ${p.presiding?`<div style="font-size:12px;color:var(--text-2);margin-bottom:5px;">Presiding: <strong style="color:var(--text);">${p.presiding}</strong></div>`:''}
+      <div class="chip-row">${(p.speakers||[]).map(s=>`<span class="chip">${s.name}</span>`).join('')||'<span style="color:var(--text-3);font-size:11px;">No speakers</span>'}</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--teal);font-weight:500;">Tap to edit →</div>
+    </div>`).join('');
 }
 
 function renderHistory() {
@@ -790,7 +937,8 @@ function renderHistory() {
 function historyTable(map,detailKey) {
   const entries = Object.entries(map).sort((a,b)=>b[1][0].date.localeCompare(a[1][0].date));
   if (!entries.length) return '<div class="empty"><p>No data yet</p></div>';
-  return `<div class="card"><div class="table-wrap"><table>
+  // Desktop table
+  const table = `<div class="card mobile-hide"><div class="table-wrap"><table>
     <thead><tr><th>Name</th><th style="width:120px">Last used</th><th style="width:52px">Count</th><th>History</th></tr></thead>
     <tbody>${entries.map(([name,recs])=>{
       const isRecent = recs[0] && daysBetween(recs[0].date, new Date().toISOString().split('T')[0]) < LOOKBACK_WEEKS*7;
@@ -799,6 +947,19 @@ function historyTable(map,detailKey) {
         <td style="font-size:12px;">${recs.length}×</td>
         <td><div class="chip-row">${recs.slice(0,4).map(r=>`<span class="chip" title="${r[detailKey]||''}">${r.date}</span>`).join('')}${recs.length>4?`<span class="chip">+${recs.length-4}</span>`:''}</div></td></tr>`;
     }).join('')}</tbody></table></div></div>`;
+  // Mobile cards
+  const cards = `<div class="mobile-card-list">${entries.map(([name,recs])=>{
+    const isRecent = recs[0] && daysBetween(recs[0].date, new Date().toISOString().split('T')[0]) < LOOKBACK_WEEKS*7;
+    return `<div style="background:var(--bg-card);border:1px solid var(--border-2);border-radius:12px;padding:14px 16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:14px;font-weight:500;">${name}</span>
+        <span style="font-size:11px;">${recs.length}×</span>
+      </div>
+      <span class="${isRecent?'hist-chip repeat-chip':'hist-chip'}" style="margin-bottom:8px;display:inline-block;">${fmtDate(recs[0].date).replace(/,.*/,'')}</span>
+      <div class="chip-row" style="margin-top:6px;">${recs.slice(0,3).map(r=>`<span class="chip">${r.date}</span>`).join('')}${recs.length>3?`<span class="chip">+${recs.length-3}</span>`:''}</div>
+    </div>`;
+  }).join('')}</div>`;
+  return table + cards;
 }
 
 async function renderUsers() {
@@ -810,6 +971,17 @@ async function renderUsers() {
     <td><span class="badge badge-${u.role==='admin'?'warn':'info'}">${u.role}</span></td>
     <td><button class="btn btn-sm btn-danger" onclick="removeUser('${u.id}','${u.name}')">Remove</button></td>
   </tr>`).join('');
+  const mobileUsers = document.getElementById('users-mobile-list');
+  if(mobileUsers) mobileUsers.innerHTML = data.map(u=>`
+    <div style="background:var(--bg-card);border:1px solid var(--border-2);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+      <div style="width:42px;height:42px;border-radius:50%;background:var(--blue-bg);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex-shrink:0;">${ini(u.name)}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:500;">${u.name}</div>
+        <div style="font-size:11px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${u.email}</div>
+        <span class="badge badge-${u.role==='admin'?'warn':'info'}" style="margin-top:4px;">${u.role}</span>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="removeUser('${u.id}','${u.name}')" style="flex-shrink:0;">Remove</button>
+    </div>`).join('');
 }
 
 /* ── USER MANAGEMENT ── */
@@ -1011,20 +1183,35 @@ async function renderResources() {
 }
 
 async function renderMissionaries() {
-  const { data } = await sb.from('missionaries').select('*').order('sort_order').order('start_date');
+  const { data } = await sb.from('missionaries').select('*').order('end_date', { ascending: true }).order('start_date', { ascending: true });
   const tbody = document.getElementById('miss-tbody');
+  const mobileList = document.getElementById('miss-mobile-list');
   if (!data?.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-3);padding:24px;">No missionaries added yet</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-3);padding:24px;">No missionaries added yet</td></tr>';
+    if(mobileList) mobileList.innerHTML = '<div style="text-align:center;color:var(--text-3);padding:24px;font-size:13px;">No missionaries added yet</div>';
     return;
   }
+  const fmtMissDate = d => d ? new Date(d+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '—';
   tbody.innerHTML = data.map(m => `<tr>
     <td style="width:44px;"><div style="width:34px;height:34px;border-radius:50%;overflow:hidden;background:var(--teal-bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--teal);">${m.photo_url ? `<img src="${m.photo_url}" style="width:100%;height:100%;object-fit:cover;" alt="">` : ini(m.name)}</div></td>
     <td style="font-weight:500;font-size:12px;">${m.name}</td>
     <td style="font-size:11px;color:var(--text-2);">${m.mission||'—'}</td>
-    <td style="font-size:11px;">${m.start_date ? new Date(m.start_date+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '—'}</td>
-    <td style="font-size:11px;">${m.end_date ? new Date(m.end_date+'T00:00:00').toLocaleDateString('en-US',{month:'short',year:'numeric'}) : 'Active'}</td>
+    <td style="font-size:11px;">${fmtMissDate(m.start_date)}</td>
+    <td style="font-size:11px;">${m.end_date ? fmtMissDate(m.end_date) : 'Active'}</td>
     <td><button class="btn btn-sm" onclick="openEditMissionary('${m.id}')">Edit</button></td>
   </tr>`).join('');
+  if(mobileList) mobileList.innerHTML = data.map(m => `
+    <div style="background:var(--bg);border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;">
+      <div style="width:48px;height:48px;border-radius:50%;overflow:hidden;background:var(--teal-bg);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;color:var(--teal);flex-shrink:0;">
+        ${m.photo_url ? `<img src="${m.photo_url}" style="width:100%;height:100%;object-fit:cover;" alt="">` : ini(m.name)}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:500;">${m.name}</div>
+        <div style="font-size:12px;color:var(--text-2);margin-top:1px;">${m.mission||''}</div>
+        <div style="font-size:11px;color:var(--text-3);margin-top:2px;">${fmtMissDate(m.start_date)} – ${m.end_date ? fmtMissDate(m.end_date) : 'Active'}</div>
+      </div>
+      <button class="btn btn-sm" onclick="openEditMissionary('${m.id}')" style="flex-shrink:0;">Edit</button>
+    </div>`).join('');
 }
 
 async function loadWardSettings() {
