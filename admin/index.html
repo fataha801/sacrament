@@ -392,6 +392,7 @@ tr:hover td { background: var(--bg-2); }
           <div class="card-hdr"><span class="card-title">Ward Info &amp; Links</span></div>
           <div class="card-body">
             <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="field"><label>Ward assigned missionaries &amp; number</label><input type="text" id="ws-wardmiss" placeholder="e.g. Elders Moon &amp; Abbott 385-391-2597"/></div>
               <div class="field"><label>Bishop / Bishopric appointments contact</label><input type="text" id="ws-bishop" placeholder="Name and phone number"/></div>
               <div class="field"><label>Chapel scheduling contact</label><input type="text" id="ws-chapel" placeholder="Name and phone number"/></div>
               <div class="field"><label>Temple recommend renewal &amp; endorsement contact</label><input type="text" id="ws-temple" placeholder="Name and phone number"/></div>
@@ -1032,6 +1033,7 @@ async function loadWardSettings() {
   const s = {};
   data.forEach(r => s[r.key] = r.value);
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  set('ws-wardmiss', s.ward_missionaries);
   set('ws-bishop',  s.bishop_contact);
   set('ws-chapel',  s.chapel_contact);
   set('ws-temple',  s.temple_contact);
@@ -1043,6 +1045,7 @@ async function loadWardSettings() {
 
 async function saveWardSettings() {
   const updates = [
+    { key: 'ward_missionaries', value: document.getElementById('ws-wardmiss').value.trim() },
     { key: 'bishop_contact', value: document.getElementById('ws-bishop').value.trim() },
     { key: 'chapel_contact', value: document.getElementById('ws-chapel').value.trim() },
     { key: 'temple_contact', value: document.getElementById('ws-temple').value.trim() },
