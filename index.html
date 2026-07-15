@@ -213,21 +213,21 @@ async function loadProgram() {
       </a>
     </div>
     <div class="block">
-      <div class="block-label">Opening</div>
+      <div class="block-label">Leadership</div>
       <div class="prog-row"><span class="row-lbl">Presiding</span><span class="row-val">${prog.presiding||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Conducting</span><span class="row-val">${prog.conducting||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Chorister</span><span class="row-val">${prog.chorister||'—'}</span></div>
       <div class="prog-row"><span class="row-lbl">Pianist</span><span class="row-val">${prog.pianist||'—'}</span></div>
     </div>
     <div class="block">
-      <div class="block-label">Hymn & Invocation</div>
+      <div class="block-label">Opening</div>
       ${hymnRow(h.opening,'Opening hymn')}
       <div class="prog-row"><span class="row-lbl">Invocation</span><span class="row-val">${prog.invocation||'—'}</span></div>
     </div>
     <div class="div-section"><span class="div-label">Ward &amp; Stake Business</span></div>
     ${prog.notes?`<div class="block"><div class="block-label">Announcements</div><div class="notes-text">${prog.notes}</div></div>`:''}
     <div class="block">
-      <div class="block-label">Ordinance of the Sacrament</div>
+      <div class="block-label">Sacrament</div>
       ${hymnRow(h.sacrament,'Sacrament hymn')}
     </div>
     <div class="div-section"><span class="div-label">Administration of the Sacrament</span></div>
@@ -264,6 +264,16 @@ async function loadBottomCards() {
   const templeContact  = s.temple_contact  || '';
   const stakeContact   = s.stake_contact   || '';
   const stakeAddress   = s.stake_address   || '';
+  const wardMiss       = s.ward_missionaries || '';
+
+  // Make phone numbers tappable
+  function telLink(text) {
+    if (!text) return text;
+    return text.replace(/(\(?\d{3}\)?[\s\-.]?\d{3}[\s\-.]?\d{4})/g, (num) => {
+      const digits = num.replace(/\D/g,'');
+      return `<a href="tel:${digits}" style="color:var(--teal);text-decoration:none;font-weight:500;">${num}</a>`;
+    });
+  }
   const missHTML = (missionaries&&missionaries.length) ? missionaries.map(m=>{
     const startStr=m.start_date?formatMissDate(m.start_date):null;
     const endStr=m.end_date?formatMissDate(m.end_date):null;
@@ -294,10 +304,11 @@ async function loadBottomCards() {
             <svg id="bcard-chev-info" class="bcard-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div id="bcard-body-info" class="bcard-body">
-            <div class="winfo-row"><span class="winfo-label">Bishop appt.</span><span class="winfo-val">To setup an appointment with the Bishop or Bishopric contact:<br><strong>${bishopContact}</strong></span></div>
-            <div class="winfo-row"><span class="winfo-label">Chapel</span><span class="winfo-val">To schedule the chapel contact:<br><strong>${chapelContact}</strong></span></div>
-            ${templeContact ? `<div class="winfo-row"><span class="winfo-label">Temple rec.</span><span class="winfo-val">Temple recommend renewal &amp; endorsement appointments:<br><strong>${templeContact}</strong></span></div>` : ''}
-            ${stakeContact ? `<div class="winfo-row"><span class="winfo-label">Pres. Paongo</span><span class="winfo-val">Appointments for President Paongo:<br><strong>${stakeContact}</strong></span></div>` : ''}
+            ${wardMiss ? `<div class="winfo-row"><span class="winfo-label">Ward missionaries</span><span class="winfo-val">Lehi 41st Assigned Missionaries:<br><strong>${telLink(wardMiss)}</strong></span></div>` : ''}
+            <div class="winfo-row"><span class="winfo-label">Bishop appt.</span><span class="winfo-val">To setup an appointment with the Bishop or Bishopric contact:<br><strong>${telLink(bishopContact)}</strong></span></div>
+            <div class="winfo-row"><span class="winfo-label">Chapel</span><span class="winfo-val">To schedule the chapel contact:<br><strong>${telLink(chapelContact)}</strong></span></div>
+            ${templeContact ? `<div class="winfo-row"><span class="winfo-label">Temple rec.</span><span class="winfo-val">Temple recommend renewal &amp; endorsement appointments:<br><strong>${telLink(templeContact)}</strong></span></div>` : ''}
+            ${stakeContact ? `<div class="winfo-row"><span class="winfo-label">Pres. Paongo</span><span class="winfo-val">Appointments for President Paongo:<br><strong>${telLink(stakeContact)}</strong></span></div>` : ''}
             ${stakeAddress ? `<div class="winfo-row"><span class="winfo-label">Stake office</span><span class="winfo-val"><a href="https://maps.app.goo.gl/8w6JqnUFXgujLkpN9" target="_blank" style="color:var(--teal);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${stakeAddress}</a></span></div>` : ''}
           </div>
         </div>
